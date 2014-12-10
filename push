@@ -11,8 +11,6 @@ if [ $(id -u) -ne 0 ]; then
     sudo="sudo"
 fi
 
-git pull
-
 for this in $*; do
     dir=$(echo ${this} | awk -F : '{print $1}')
     test -d ${dir} || echo "Error: ${image} (subdirectory $dir) not found"
@@ -21,7 +19,5 @@ done
 
 for this in $*; do
     image=$(echo $this | sed -e 's!/*$!!')    # remove trailing slashes
-    dir=$(echo ${image} | awk -F : '{print $1}')
-    ${sudo} docker build -t="eduid/${image}" "${dir}"
-    ${sudo} docker tag "eduid/${image}" "docker.sunet.se/eduid/${image}"
+    ${sudo} docker push "docker.sunet.se/eduid/${dir}"
 done
