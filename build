@@ -1,0 +1,21 @@
+#!/bin/bash
+
+set -e
+
+if [ "x$1" = "x" ]; then
+    echo "Syntax: $0 subdir ..."
+    exit 1
+fi
+
+git pull
+
+for image in $*; do
+    test -d ${image} || echo "Error: ${image} not found"
+    test -d ${image} || exit 1
+done
+
+for image in $*; do
+    image=$(echo $image | sed -e 's!/*$!!')    # remove trailing slashes
+    docker build -t="eduid/${image}" "${image}"
+    docker tag "${image}" "docker.sunet.se/${image}"
+done
