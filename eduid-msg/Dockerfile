@@ -6,10 +6,10 @@ RUN ln -s /usr/lib/libxmlsec1-openssl.so.1 /usr/lib/libxmlsec1-openssl.so
 
 VOLUME ["/opt/eduid/etc"]
 
-RUN echo "#!/bin/sh" > /start.sh \
-  && echo "" >> /start.sh \
-  && echo "service eduid_msg start" >> /start.sh \
-  && echo "tail -F /var/log/upstart/eduid_msg.log" >> /start.sh
+ADD setup.sh /opt/eduid/setup.sh
+RUN /opt/eduid/setup.sh
+
+ADD start.sh /start.sh
 
 WORKDIR /
 
