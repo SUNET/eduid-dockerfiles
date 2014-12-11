@@ -25,12 +25,12 @@ RUN sed -e "s/^\(bind_ip =\).\+$/\1 0.0.0.0/" \
   && mkdir -p /data/db
 
 # Define mountable directories.
-VOLUME ["/data", "/var/log/mongodb" ]
+VOLUME ["/data", "/var/log/mongodb", "/opt/eduid/etc" ]
 
 # Define working directory.
 WORKDIR /data
 
-CMD ["/usr/bin/mongod"]
+CMD ["/usr/bin/mongod", "--config", "/opt/eduid/etc/mongodb.conf"]
 
 EXPOSE 27017
 EXPOSE 28017

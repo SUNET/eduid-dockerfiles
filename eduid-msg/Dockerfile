@@ -2,7 +2,7 @@ FROM docker.sunet.se/eduid/pythonenv
 
 MAINTAINER eduid-dev <eduid-dev@SEGATE.SUNET.SE>
 
-RUN ln -s /usr/lib/libxmlsec1-openssl.so.1 /usr/lib/libxmlsec1-openssl.so
+#RUN ln -s /usr/lib/libxmlsec1-openssl.so.1 /usr/lib/libxmlsec1-openssl.so
 
 VOLUME ["/opt/eduid/etc"]
 

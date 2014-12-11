@@ -15,3 +15,5 @@ RUN echo "#!/bin/sh" > start.sh \
   && echo "tail -f /var/log/rabbitmq/*" >> start.sh
 
 CMD ["bash", "/start.sh"]
+
+EXPOSE 5672
