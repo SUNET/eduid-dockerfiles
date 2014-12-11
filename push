@@ -19,5 +19,5 @@ done
 
 for this in $*; do
     image=$(echo $this | sed -e 's!/*$!!')    # remove trailing slashes
-    ${sudo} docker push "docker.sunet.se/eduid/${dir}"
+    ${sudo} docker push "docker.sunet.se/eduid/${image}"
 done
