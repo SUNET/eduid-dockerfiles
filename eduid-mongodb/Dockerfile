@@ -19,12 +19,13 @@ ENV LC_ALL C.UTF-8
 RUN sed -e "s/^\(bind_ip =\).\+$/\1 0.0.0.0/" \
         -e "s/^\(dbpath =\).\+$/\1 \/data/" \
         -e "s/^\(logpath =\).\+$/\1 \/data\/mongod.log/" \
+        -e "s/^\(oplogSize =\).\+$/\1 10" \
      </etc/mongodb.conf >mongodb.conf.new \
   && mv -f mongodb.conf.new /etc/mongodb.conf \
   && mkdir -p /data/db
 
 # Define mountable directories.
-VOLUME ["/data"]
+VOLUME ["/data", "/var/log/mongodb" ]
 
 # Define working directory.
 WORKDIR /data
