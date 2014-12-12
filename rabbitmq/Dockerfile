@@ -16,4 +16,6 @@ RUN echo "#!/bin/sh" > start.sh \
 
 CMD ["bash", "/start.sh"]
 
+VOLUME ["/etc/rabbitmq"]
+
 EXPOSE 5672

@@ -21,8 +21,7 @@ RUN sed -e "s/^\(bind_ip =\).\+$/\1 0.0.0.0/" \
         -e "s/^\(logpath =\).\+$/\1 \/data\/mongod.log/" \
         -e "s/^\(oplogSize =\).\+$/\1 10/" \
      </etc/mongodb.conf >mongodb.conf.new \
-  && mv -f mongodb.conf.new /etc/mongodb.conf \
-  && mkdir -p /data/db
+  && mv -f mongodb.conf.new /etc/mongodb.conf
 
 # Define mountable directories.
 VOLUME ["/data", "/var/log/mongodb", "/opt/eduid/etc" ]
@@ -30,7 +29,9 @@ VOLUME ["/data", "/var/log/mongodb", "/opt/eduid/etc" ]
 # Define working directory.
 WORKDIR /data
 
-CMD ["/usr/bin/mongod", "--config", "/opt/eduid/etc/mongodb.conf"]
+ADD start.sh /start.sh
+
+CMD ["bash", "/start.sh"]
 
 EXPOSE 27017
 EXPOSE 28017
