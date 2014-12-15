@@ -13,7 +13,7 @@ ls -l /opt/eduid/etc/eduid-signup.ini
 
 pserve_args=""
 if [ -f /opt/eduid/src/setup.py ]; then
-    pserve_args="--reload"
+    pserve_args="--reload --monitor-restart"
 fi
 
 start-stop-daemon --start -c eduid:eduid --exec \
