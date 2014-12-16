@@ -1,0 +1,72 @@
+#!/usr/bin/env python
+#
+# Code stolen from turq unit tests.
+#
+
+import sys
+import time
+import urllib
+import httplib
+import subprocess
+
+
+class Foo():
+    def setUp(self):
+        sys.stderr.write("Starting turq\n")
+        self.proc = subprocess.Popen(
+            # exec prevents the shell from spawning a subprocess
+            # which then fails to terminate.
+            # http://stackoverflow.com/questions/4789837/
+            'exec /opt/eduid/bin/python /opt/eduid/lib/python2.7/site-packages/turq.py', shell=True,
+            stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        time.sleep(0.2)
+
+    def request(self, method, path, headers=None, body=None):
+        conn = httplib.HTTPConnection('127.0.0.1', 13085)
+        conn.request(method, path, body, headers or {})
+        resp = conn.getresponse()
+        return resp, resp.read()
+
+    def install(self, code, check=True):
+        sys.stderr.write("Installing code:\n{!s}\n\n".format(code))
+        info, data = self.request(
+            'POST', '/+turq/',
+            {'Content-Type': 'application/x-www-form-urlencoded'},
+            urllib.urlencode({'code': code})
+            )
+        assert(info.status == httplib.OK)
+        if check:
+            if not '>okay<' in data:
+                sys.stderr.write("Request info: {!r}\nRequest data: {!r}\n\n".format(info, data))
+            assert('>okay<' in data)
+        return info, data
+
+    def test_lambda_json(self):
+        self.install("with path() as r:\n"
+                     "    r.json(lambda req: {'id': req.query['id']})") 
+        info, data = self.request('GET', '/?id=foo')
+        assert(data == '{"id": "foo"}')
+
+def main():
+    foo = Foo()
+    foo.setUp()
+    foo.test_lambda_json()
+
+    # Mock VCCS authentication backend results
+    foo.install("import json\n"
+                "with path('/add_creds') as r:\n"
+                "    r.body(json.dumps({'add_creds_response': {'version': 1, 'success': True,}}))\n"
+                "\n"
+                "with path('/revoke_creds') as r:\n"
+                "    r.body(json.dumps({'revoke_creds_response': {'version': 1, 'success': True,}}))\n"
+                )
+
+    while True:
+        try:
+            raw_input('Turq running on port 13085. Press Ctrl+C to exit.')
+        except EOFError:
+            # Non-interactive `docker run'
+            time.sleep(3600)
+
+if __name__ == '__main__':
+    main()
