@@ -2,4 +2,4 @@
 
 set -e
 
-/opt/eduid/bin/pip install -i https://pypi.nordu.net turq
+/opt/eduid/bin/pip install -i https://pypi.nordu.net/simple/ turq

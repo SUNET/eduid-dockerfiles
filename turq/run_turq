@@ -59,6 +59,9 @@ def main():
                 "\n"
                 "with path('/revoke_creds') as r:\n"
                 "    r.body(json.dumps({'revoke_creds_response': {'version': 1, 'success': True,}}))\n"
+                "\n"
+                "with path('/authenticate') as r:\n"
+                "    r.body(json.dumps({'auth_response': {'version': 1, 'authenticated': True,}}))\n"
                 )
 
     while True:

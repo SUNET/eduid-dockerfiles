@@ -7,4 +7,4 @@ apt-get -y install \
     libxslt-dev \
     zlib1g-dev
 
-/opt/eduid/bin/pip install -i https://pypi.nordu.net eduid-msg
+/opt/eduid/bin/pip install -i https://pypi.nordu.net/simple/ eduid-msg

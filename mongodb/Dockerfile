@@ -1,4 +1,5 @@
-FROM ubuntu:14.04
+# pythonenv used to get environment for db-scripts
+FROM docker.sunet.se/eduid/pythonenv
 
 MAINTAINER eduid-dev <eduid-dev@SEGATE.SUNET.SE>
 
@@ -8,9 +9,8 @@ RUN apt-get update && apt-get install -y \
   mongodb \
   locales
 
-#RUN DEBIAN_FRONTEND=noninteractive dpkg-reconfigure locales && \
-#    locale-gen C.UTF-8 && \
-#    /usr/sbin/update-locale LANG=C.UTF-8
+ADD setup.sh /opt/eduid/setup.sh
+RUN /opt/eduid/setup.sh
 
 ENV LANG C.UTF-8
 ENV LANGUAGE C.UTF-8
@@ -24,7 +24,7 @@ RUN sed -e "s/^\(bind_ip =\).\+$/\1 0.0.0.0/" \
   && mv -f mongodb.conf.new /etc/mongodb.conf
 
 # Define mountable directories.
-VOLUME ["/data", "/var/log/mongodb", "/opt/eduid/etc" ]
+VOLUME ["/data", "/var/log/mongodb", "/opt/eduid/etc", "/opt/eduid/db-scripts" ]
 
 # Define working directory.
 WORKDIR /data
