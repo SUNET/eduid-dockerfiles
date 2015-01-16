@@ -1,5 +1,6 @@
 #!/bin/sh
 
+chown -R rabbitmq:rabbitmq /var/log/rabbitmq/
 service rabbitmq-server start
 
 set -x

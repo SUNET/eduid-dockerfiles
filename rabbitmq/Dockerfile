@@ -11,7 +11,7 @@ ADD start.sh /start.sh
 
 CMD ["bash", "/start.sh"]
 
-VOLUME ["/etc/rabbitmq"]
+VOLUME ["/etc/rabbitmq", "/var/log/rabbitmq"]
 
 EXPOSE 5672
 EXPOSE 15672
