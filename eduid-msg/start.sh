@@ -10,6 +10,11 @@ chmod 640 /opt/eduid/etc/eduid_msg/eduid_msg.ini
 celery_args="--loglevel INFO"
 if [ -f /opt/eduid/src/setup.py ]; then
     celery_args="--loglevel DEBUG --autoreload"
+else
+    if [ -f /opt/eduid/etc/eduid_msg/eduid_msg_DEBUG ]; then
+	# eduid-dev environment
+	celery_args="--loglevel DEBUG"
+    fi
 fi
 
 cd /opt/eduid/etc/eduid_msg
