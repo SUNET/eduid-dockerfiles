@@ -23,5 +23,5 @@ for this in $*; do
     image=$(echo $this | sed -e 's!/*$!!')    # remove trailing slashes
     dir=$(echo ${image} | awk -F : '{print $1}')
     ${sudo} docker build --force-rm=true -t="eduid/${image}" "${dir}"
-    ${sudo} docker tag "eduid/${image}" "docker.sunet.se/eduid/${image}"
+    ${sudo} docker tag -f "eduid/${image}" "docker.sunet.se/eduid/${image}"
 done
