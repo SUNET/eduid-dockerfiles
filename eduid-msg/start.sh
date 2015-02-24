@@ -2,6 +2,8 @@
 
 set -e
 
+celerybeat_file=${celerybeat_file-'/opt/eduid/etc/eduid_msg/celerybeat-schedule'}
+
 . /opt/eduid/bin/activate
 
 chgrp eduid /opt/eduid/etc/eduid_msg/eduid_msg.ini
@@ -17,6 +19,15 @@ else
     fi
 fi
 
+if [ ! -s "${celerybeat_file}" ]; then
+    echo "$0: Creating celerybeat file ${celerybeat_file}"
+    touch "${celerybeat_file}"
+    chown eduid:eduid "${celerybeat_file}"
+    chmod 640 "${celerybeat_file}"
+fi
+
 cd /opt/eduid/etc/eduid_msg
 
-exec celery worker --app=eduid_msg --events --uid eduid --gid eduid $celery_args $*
+exec celery worker --app=eduid_msg --events --uid eduid --gid eduid \
+    --logfile=/var/log/eduid/eduid-msg.log \
+    $celery_args $*
