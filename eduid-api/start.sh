@@ -2,7 +2,7 @@
 
 set -e
 
-eduid_api_cfgfile=${eduid_api_cfg_file-'/opt/eduid/etc/eduid_api.ini'}
+eduid_api_cfgfile=${eduid_api_cfgfile-'/opt/eduid/etc/eduid_api.ini'}
 eduid_api_debug=${eduid_api_debug-'--debug'}
 
 . /opt/eduid/bin/activate
