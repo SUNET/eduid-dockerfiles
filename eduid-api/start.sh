@@ -2,6 +2,9 @@
 
 set -e
 
+eduid_api_cfgfile=${eduid_api_cfg_file-'/opt/eduid/etc/eduid_api.ini'}
+eduid_api_debug=${eduid_api_debug-'--debug'}
+
 . /opt/eduid/bin/activate
 
 chown eduid: /var/log/eduid
@@ -13,7 +16,7 @@ fi
 
 start-stop-daemon --start -c eduid:eduid --exec \
      /opt/eduid/bin/python -- $run \
-    --config-file /opt/eduid/etc/eduid_api.ini \
-    --debug
+    --config-file $eduid_api_cfgfile \
+    $eduid_api_debug
 
 echo $0: Exiting
