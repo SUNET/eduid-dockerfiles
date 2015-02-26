@@ -9,8 +9,13 @@ chown eduid: /var/log/eduid /opt/eduid/run
 chgrp eduid /opt/eduid/etc/eduid-dashboard.ini
 chmod 640 /opt/eduid/etc/eduid-dashboard.ini
 
-# Create metadata
-cd /opt/eduid/etc && /opt/eduid/bin/make_metadata.py dashboard_pysaml2_settings.py | xmllint --format - > dashboard_metadata.xml
+metadata_file=${metadata_file-'/opt/eduid/run/dashboard_metadata.xml'}
+if [ ! -s "${metadata_file}" ]; then
+    # Create file with local metadata
+    cd /opt/eduid/etc && \
+	/opt/eduid/bin/make_metadata.py dashboard_pysaml2_settings.py | \
+	xmllint --format - > "${metadata_file}"
+fi
 
 pserve_args=""
 if [ -f /opt/eduid/src/setup.py ]; then
