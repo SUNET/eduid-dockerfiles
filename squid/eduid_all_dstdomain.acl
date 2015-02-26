@@ -1,0 +1,14 @@
+ppa.launchpad.net
+security.ubuntu.com
+archive.ubuntu.com
+se.archive.ubuntu.com
+keyserver.ubuntu.com
+apt.puppetlabs.com
+get.docker.com
+get.docker.io
+#
+# Allow Python package installation - only in dev environment
+pypi.nordu.net
+pypi.python.org
+#
+monitor-fre-1.eduid.se
