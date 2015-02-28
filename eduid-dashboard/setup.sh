@@ -3,6 +3,7 @@
 set -e
 set -x
 
+apt-get update
 apt-get -y install \
     libxml2-dev \
     libxslt1-dev \

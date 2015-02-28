@@ -13,8 +13,6 @@ ADD start.sh /start.sh
 
 WORKDIR /
 
-ENV C_FORCE_ROOT 1
-
 EXPOSE 8080
 
 CMD ["bash", "/start.sh"]

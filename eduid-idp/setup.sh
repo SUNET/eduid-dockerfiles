@@ -9,14 +9,15 @@ set -x
 #  'build-essential', # needed to install PyKCS11
 #  'zlib1g-dev',      # needed to install pyXMLSecurity
 
+apt-get update
 apt-get -y install \
     libxml2-dev \
     libxslt1-dev \
     zlib1g-dev \
     xmlsec1 \
     libxml2-utils
-
-#    swig
+apt-get clean
+rm -rf /var/lib/apt/lists/*
 
 /opt/eduid/bin/pip install --pre -i https://pypi.nordu.net/simple/ eduid-idp
 /opt/eduid/bin/pip install --pre -i https://pypi.nordu.net/simple/ eduid-idp-html
