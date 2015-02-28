@@ -36,5 +36,6 @@ cd "${cfg_dir}"
 
 exec celery worker --app=eduid_am --events --uid eduid --gid eduid \
     --logfile="${logfile}" \
-    #-s "${celerybeat_file}" \
     $celery_args
+
+    #-s "${celerybeat_file}" \
