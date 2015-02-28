@@ -1,6 +1,7 @@
 #!/bin/sh
 
 set -e
+set -x
 
 celerybeat_file=${celerybeat_file-'/opt/eduid/etc/eduid_msg/celerybeat-schedule'}
 

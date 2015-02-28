@@ -1,18 +1,37 @@
 #!/bin/sh
 
 set -e
+set -x
 
 . /opt/eduid/bin/activate
 
-# don't fail on these, in case the cfg-dir is mounted read only
-chgrp eduid /opt/eduid/etc/eduid_am/eduid_am.ini || true
-chmod 640 /opt/eduid/etc/eduid_am/eduid_am.ini || true
+# These could be set from Puppet if multiple instances are deployed
+eduid_name=${eduid_name-'eduid-am'}
+base_dir=${base_dir-"/opt/eduid/${eduid_name}"}
+# These *can* be set from Puppet, but are less expected to...
+cfg_dir=${cfg_dir-"${base_dir}/etc"}
+ini=${ini-"${cfg_dir}/${eduid_name}.ini"}
+log_dir=${log_dir-'/var/log/eduid'}
+logfile=${logfile-"${log_dir}/${eduid_name}.log"}
+
+chown eduid: "${log_dir}" "${state_dir}"
+
+# || true to not fail on read-only cfg_dir
+chgrp eduid "${ini}" || true
+chmod 640 "${ini}" || true
 
 celery_args="--loglevel INFO"
 if [ -f /opt/eduid/src/setup.py ]; then
+    # eduid-dev environment
     celery_args="--loglevel DEBUG --autoreload"
 fi
 
-cd /opt/eduid/etc/eduid_am
+touch "${logfile}"
+chgrp eduid "${logfile}"
+chmod 660 "${logfile}"
 
-exec celery worker --app=eduid_am --events --uid eduid --gid eduid $celery_args $*
+cd "${cfg_dir}"
+
+exec celery worker --app=eduid_am --events --uid eduid --gid eduid \
+    --logfile="${logfile}" \
+    $celery_args
