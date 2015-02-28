@@ -3,8 +3,6 @@
 set -e
 set -x
 
-celerybeat_file=${celerybeat_file-'/opt/eduid/etc/eduid_msg/celerybeat-schedule'}
-
 . /opt/eduid/bin/activate
 
 # These could be set from Puppet if multiple instances are deployed
@@ -15,6 +13,8 @@ cfg_dir=${cfg_dir-"${base_dir}/etc"}
 ini=${ini-"${cfg_dir}/${eduid_name}.ini"}
 log_dir=${log_dir-'/var/log/eduid'}
 logfile=${logfile-"${log_dir}/${eduid_name}.log"}
+state_dir=${state_dir-"${base_dir}/run"}
+celerybeat_file=${celerybeat_file-"${state_dir/celerybeat-schedule"}
 
 chown eduid: "${log_dir}" "${state_dir}"
 
@@ -47,4 +47,5 @@ cd "${cfg_dir}"
 
 exec celery worker --app=eduid_msg --events --uid eduid --gid eduid \
     --logfile="${logfile}" \
+    -s "${celerybeat_file}" \
     $celery_args
