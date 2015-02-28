@@ -1,9 +1,14 @@
 #!/bin/sh
 
 set -e
+set -x
 
+# These could be set from Puppet if multiple instances are deployed
+eduid_name=${eduid_name-'eduid-mm-service'}
+base_dir=${base_dir-"/opt/eduid/${eduid_name}"}
+# These *can* be set from Puppet, but are less expected to...
 mm_keystore_name=${mm_keystore_name-'eduid.se'}
-mm_etcdir=${mm_etcdir-'/opt/eduid/etc/eduid_mm_service'}
+mm_etcdir=${mm_etcdir-"${base_dir}/etc"}
 mm_cert_file=${mm_cert_file-"${mm_etcdir}/mm.crt"}
 mm_key_file=${mm_key_file-"${mm_etcdir}/mm.key"}
 mm_keystore_file=${mm_keystore_file-"${mm_etcdir}/mm_keystore.p12"}
@@ -56,4 +61,5 @@ chmod 640 "${mm_truststore_file}" "${mm_keystore_file}" "${mm_key_p8_file}"
 chgrp eduid "${mm_properties}"
 chmod 640 "${mm_properties}"
 
+echo "$0: Starting JAR ${mm_jarfile} (properties file: ${mm_properties})"
 exec start-stop-daemon --start -c eduid --exec /usr/bin/java -- -jar "${mm_jarfile}" -c "${mm_properties}"
