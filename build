@@ -5,14 +5,16 @@ set -e
 if [ "x$1" = "x" ]; then
     echo "Syntax: $0 [-f] image ..."
     echo ""
-    echo "  -f   force re-build by removing existing tags"
+    echo "  -f   force re-build by not using cache"
     echo ""
     exit 1
 fi
 
+build_opts=""
 force=0
 if [ "x$1" = "x-f" ]; then
     force=1
+    build_opts+=" --no-cache=true"
     shift
 fi
 
@@ -34,6 +36,6 @@ for this in $*; do
     if [ $force -eq 1 ]; then
 	${sudo} docker rmi "eduid/${image}" "docker.sunet.se/eduid/${image}" || true
     fi
-    ${sudo} docker build --force-rm=true -t="eduid/${image}" "${dir}"
+    ${sudo} docker build $build_opts --force-rm=true -t="eduid/${image}" "${dir}"
     ${sudo} docker tag -f "eduid/${image}" "docker.sunet.se/eduid/${image}"
 done
