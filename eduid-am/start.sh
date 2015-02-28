@@ -34,7 +34,8 @@ chmod 660 "${logfile}"
 
 cd "${cfg_dir}"
 
-exec celery worker --app=eduid_am --events --uid eduid --gid eduid \
+echo "$0: Starting Celery app '${eduid_name}' in directory ${cfg_dir}"
+exec celery worker --app="${eduid_name}" --events --uid eduid --gid eduid \
     --logfile="${logfile}" \
     $celery_args
 
