@@ -14,7 +14,7 @@ ini=${ini-"${cfg_dir}/${eduid_name}.ini"}
 log_dir=${log_dir-'/var/log/eduid'}
 logfile=${logfile-"${log_dir}/${eduid_name}.log"}
 state_dir=${state_dir-"${base_dir}/run"}
-celerybeat_file=${celerybeat_file-"${state_dir/celerybeat-schedule"}
+celerybeat_file=${celerybeat_file-"${state_dir}/celerybeat-schedule"}
 
 chown eduid: "${log_dir}" "${state_dir}"
 
