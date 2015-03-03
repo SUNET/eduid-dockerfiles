@@ -7,10 +7,12 @@ set -x
 
 # These could be set from Puppet if multiple instances are deployed
 eduid_name=${eduid_name-'eduid-msg'}
+# this is a Python module name, so can't have hyphen (also name of .ini file)
+app_name=$(echo $eduid_name | tr "-" "_")
 base_dir=${base_dir-"/opt/eduid/${eduid_name}"}
 # These *can* be set from Puppet, but are less expected to...
 cfg_dir=${cfg_dir-"${base_dir}/etc"}
-ini=${ini-"${cfg_dir}/${eduid_name}.ini"}
+ini=${ini-"${cfg_dir}/${app_name}.ini"}
 log_dir=${log_dir-'/var/log/eduid'}
 logfile=${logfile-"${log_dir}/${eduid_name}.log"}
 state_dir=${state_dir-"${base_dir}/run"}
@@ -45,8 +47,8 @@ chmod 660 "${logfile}"
 
 cd "${cfg_dir}"
 
-echo "$0: Starting Celery app '${eduid_name}' in directory ${cfg_dir}"
-exec celery worker --app="${eduid_name}" --events --uid eduid --gid eduid \
+echo "$0: Starting Celery app '${app_name}' in directory ${cfg_dir}"
+exec celery worker --app="${app_name}" --events --uid eduid --gid eduid \
     --logfile="${logfile}" \
     -s "${celerybeat_file}" \
     $celery_args
