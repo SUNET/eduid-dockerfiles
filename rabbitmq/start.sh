@@ -14,7 +14,7 @@ rabbitmqctl set_user_tags admin administrator
 rabbitmqctl add_user eduid eduid_pw
 
 # Set up virtualhosts
-for vh in msg am; do
+for vh in msg am lookup_mobile; do
     rabbitmqctl add_vhost ${vh}
     rabbitmqctl set_permissions -p ${vh} eduid ".*" ".*" ".*"
     rabbitmqctl set_permissions -p ${vh} admin ".*" ".*" ".*"
