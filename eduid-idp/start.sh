@@ -14,7 +14,7 @@ log_dir=${log_dir-'/var/log/eduid'}
 state_dir=${state_dir-"${base_dir}/run"}
 metadata=${metadata-"${state_dir}/metadata.xml"}
 ini=${ini-"${cfg_dir}/${eduid_name}.ini"}
-pysaml2_settings=${pysaml2_settings-"${cfg_dir}/pysaml2_settings.py"}
+pysaml2_settings=${pysaml2_settings-"${cfg_dir}/idp_pysaml2_settings.py"}
 run=${run-'/opt/eduid/bin/eduid_idp'}
 
 chown eduid: "${log_dir}" "${state_dir}"
