@@ -12,7 +12,5 @@ apt-get clean
 rm -rf /var/lib/apt/lists/*
 
 /opt/eduid/bin/pip install --pre -i https://pypi.nordu.net/simple/ eduid_lookup_mobile
-# until eduid_msg is a setup.py dependency of eduid_lookup_mobile
-/opt/eduid/bin/pip install --pre -i https://pypi.nordu.net/simple/ eduid_msg
 
 /opt/eduid/bin/pip freeze
