@@ -25,7 +25,9 @@ chgrp eduid "${ini}" || true
 chmod 640 "${ini}" || true
 
 celery_args="--loglevel INFO"
-if [ -f /opt/eduid/src/setup.py ]; then
+if [ -f /opt/eduid/src/${eduid_name}/setup.py -o \
+     -f /opt/eduid/src/${app_name}/setup.py ]; then
+    # eduid-dev environment
     celery_args="--loglevel DEBUG --autoreload"
 else
     if [ -f "${cfg_dir}/${app_name}_DEBUG" ]; then
