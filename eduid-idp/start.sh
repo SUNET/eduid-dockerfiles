@@ -16,6 +16,7 @@ metadata=${metadata-"${state_dir}/metadata.xml"}
 ini=${ini-"${cfg_dir}/${eduid_name}.ini"}
 pysaml2_settings=${pysaml2_settings-"${cfg_dir}/idp_pysaml2_settings.py"}
 run=${run-'/opt/eduid/bin/eduid_idp'}
+extra_args=${extra_args-''}
 
 chown eduid: "${log_dir}" "${state_dir}"
 
@@ -23,8 +24,24 @@ chown eduid: "${log_dir}" "${state_dir}"
 chgrp eduid "${ini}" || true
 chmod 640 "${ini}" || true
 
-if [ -x /opt/eduid/src/src/eduid_idp/idp.py ]; then
-    run=/opt/eduid/src/src/eduid_idp/idp.py
+# Look for executable in developers environment
+if [ "x${PYTHONPATH}" != "x" ]; then
+    found=0
+    for src_dir in $(echo "${PYTHONPATH}" | tr ":" "\n"); do
+	for this in "${src_dir}/idp.py" "${src_dir}/eduid_idp/idp.py"; do
+	    if [ -x "${this}" ]; then
+		echo "$0: Found developer's entry point: ${this}"
+		run="${this}"
+		extra_args+=" --debug"
+		found=1
+		break
+	    fi
+	done
+	if [ $found -ne 0 ]; then
+	    # stop at first match
+	    break
+	fi
+    done
 fi
 
 # nice to have in docker run output, to check what
@@ -43,6 +60,6 @@ echo "$0: Starting ${run} with config ${ini}"
 start-stop-daemon --start -c eduid:eduid --exec \
      /opt/eduid/bin/python -- $run \
     --config-file ${ini} \
-    --debug
+    ${extra_args}
 
 echo $0: Exiting
