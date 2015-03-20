@@ -23,7 +23,7 @@ chgrp eduid "${ini}" || true
 chmod 640 "${ini}" || true
 
 pserve_args=""
-if [ -f /opt/eduid/src/setup.py ]; then
+if [ -f "/opt/eduid/src/${eduid_name}/setup.py" ]; then
     # developer mode, restart on code changes
     pserve_args="--reload --monitor-restart"
 fi
