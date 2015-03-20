@@ -9,13 +9,18 @@ set -x
 #  'build-essential', # needed to install PyKCS11
 #  'zlib1g-dev',      # needed to install pyXMLSecurity
 
+#  libffi-dev         # needed by pysaml2
+#  libssl-dev         # needed by pysaml2
+
 apt-get update
 apt-get -y install \
     libxml2-dev \
     libxslt1-dev \
     zlib1g-dev \
     xmlsec1 \
-    libxml2-utils
+    libxml2-utils \
+    libffi-dev \
+    libssl-dev
 apt-get clean
 rm -rf /var/lib/apt/lists/*
 
