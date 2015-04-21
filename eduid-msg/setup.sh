@@ -10,6 +10,7 @@ apt-get -y install \
 apt-get clean
 rm -rf /var/lib/apt/lists/*
 
+/opt/eduid/bin/pip install --pre -i https://pypi.nordu.net/simple/ suds
 /opt/eduid/bin/pip install --pre -i https://pypi.nordu.net/simple/ eduid-msg
 
 /opt/eduid/bin/pip freeze
