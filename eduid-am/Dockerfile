@@ -2,7 +2,7 @@ FROM docker.sunet.se/eduid/pythonenv
 
 MAINTAINER eduid-dev <eduid-dev@SEGATE.SUNET.SE>
 
-VOLUME ["/opt/eduid/etc"]
+VOLUME ["/opt/eduid/eduid-am/etc", "/opt/eduid/eduid-am/scripts"]
 
 ADD setup.sh /opt/eduid/setup.sh
 RUN /opt/eduid/setup.sh
