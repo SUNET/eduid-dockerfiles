@@ -9,13 +9,16 @@ apt-get -y install \
 apt-get clean
 rm -rf /var/lib/apt/lists/*
 
-#/opt/eduid/bin/pip install -i https://pypi.nordu.net/simple/ raven
-/opt/eduid/bin/pip install --pre -i https://pypi.nordu.net/simple/ eduid-api
-/opt/eduid/bin/pip install -i https://pypi.nordu.net/simple/ jose
-/opt/eduid/bin/pip install -i https://pypi.nordu.net/simple/ vccs-client
-/opt/eduid/bin/pip install -i https://pypi.nordu.net/simple/ qrcode
-/opt/eduid/bin/pip install -i https://pypi.nordu.net/simple/ Pillow
-/opt/eduid/bin/pip install -i https://pypi.nordu.net/simple/ requests
-/opt/eduid/bin/pip install --pre -i https://pypi.nordu.net/simple/ pyhsm
+#PYPI="https://pypi.nordu.net/simple/"
+PYPI="http://pypiserver.docker:8080/simple/"
+
+#/opt/eduid/bin/pip install -i ${PYPI} raven
+/opt/eduid/bin/pip install --pre -i ${PYPI} eduid-api
+/opt/eduid/bin/pip install -i ${PYPI} jose
+/opt/eduid/bin/pip install -i ${PYPI} vccs-client
+/opt/eduid/bin/pip install -i ${PYPI} qrcode
+/opt/eduid/bin/pip install -i ${PYPI} Pillow
+/opt/eduid/bin/pip install -i ${PYPI} requests
+/opt/eduid/bin/pip install --pre -i ${PYPI} pyhsm
 
 /opt/eduid/bin/pip freeze

@@ -1,8 +1,7 @@
 #!/bin/sh
 
 set -e
-
-eduid_api_debug=${eduid_api_debug-'--debug'}
+set -x
 
 . /opt/eduid/bin/activate
 
@@ -14,6 +13,7 @@ cfg_dir=${cfg_dir-"${base_dir}/etc"}
 log_dir=${log_dir-'/var/log/eduid'}
 ini=${ini-"${cfg_dir}/${eduid_name}.ini"}
 run=${run-'/opt/eduid/bin/eduid_api'}
+extra_args=${extra_args-''}
 
 chown eduid: "${log_dir}"
 
@@ -21,9 +21,26 @@ chown eduid: "${log_dir}"
 chgrp eduid "${ini}" || true
 chmod 640 "${ini}" || true
 
-if [ -x /opt/eduid/src/src/eduid_api/eduid_apibackend.py ]; then
-    # developer mode
-    run=/opt/eduid/src/src/eduid_api/eduid_apibackend.py
+# Look for executable in developers environment
+if [ "x${PYTHONPATH}" != "x" ]; then
+    found=0
+    for src_dir in $(echo "${PYTHONPATH}" | tr ":" "\n"); do
+	for this in "${src_dir}/eduid_apibackend.py" \
+	    "${src_dir}/eduid_api/eduid_apibackend.py" \
+	    "${src_dir}/eduid-api/eduid_apibackend.py"; do
+	    if [ -x "${this}" ]; then
+		echo "$0: Found developer's entry point: ${this}"
+		run="${this}"
+		extra_args+=" --debug"
+		found=1
+		break
+	    fi
+	done
+	if [ $found -ne 0 ]; then
+	    # stop at first match
+	    break
+	fi
+    done
 fi
 
 # nice to have in docker run output, to check what
@@ -33,8 +50,8 @@ fi
 echo ""
 echo "$0: Starting ${run} with config ${ini}"
 start-stop-daemon --start -c eduid:eduid --exec \
-     /opt/eduid/bin/python -- $run \
-    --config-file $ini \
-    $eduid_api_debug
+     /opt/eduid/bin/python -- "${run}" \
+    --config-file "${ini}" \
+    ${extra_args}
 
 echo $0: Exiting
