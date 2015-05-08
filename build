@@ -19,7 +19,11 @@ if [ "x$1" = "x-f" ]; then
 fi
 
 if [ $(id -u) -ne 0 ]; then
-    sudo="sudo"
+    # check if non-root user is member of the group 'docker', in which case
+    # sudo is assumed to not be necessary
+    if ! id | grep -q docker; then
+	sudo="sudo"
+    fi
 fi
 
 git pull
