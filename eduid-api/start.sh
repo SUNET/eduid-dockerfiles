@@ -43,6 +43,11 @@ if [ "x${PYTHONPATH}" != "x" ]; then
     done
 fi
 
+if [ -f "${cfg_dir}/${eduid_name}_DEBUG" ]; then
+    # eduid-dev environment
+    extra_args+=" --debug"
+fi
+
 # nice to have in docker run output, to check what
 # version of something is actually running.
 /opt/eduid/bin/pip freeze
