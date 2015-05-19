@@ -11,6 +11,13 @@ apt-get -y install \
 apt-get clean
 rm -rf /var/lib/apt/lists/*
 
-/opt/eduid/bin/pip install --pre -i https://pypi.nordu.net/simple/ eduid_lookup_mobile
+PYPI="https://pypi.nordu.net/simple/"
+ping -c 1 -q pypiserver.docker && PYPI="http://pypiserver.docker:8080/simple/"
+
+echo "#############################################################"
+echo "$0: Using PyPi URL ${PYPI}"
+echo "#############################################################"
+
+/opt/eduid/bin/pip install --pre -i ${PYPI} eduid_lookup_mobile
 
 /opt/eduid/bin/pip freeze

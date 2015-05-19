@@ -24,10 +24,17 @@ apt-get -y install \
 apt-get clean
 rm -rf /var/lib/apt/lists/*
 
-/opt/eduid/bin/pip install --pre -i https://pypi.nordu.net/simple/ eduid-idp
-/opt/eduid/bin/pip install --pre -i https://pypi.nordu.net/simple/ eduid-idp-html
-/opt/eduid/bin/pip install -i https://pypi.nordu.net/simple/ raven
-/opt/eduid/bin/pip install -i https://pypi.nordu.net/simple/ pyXMLSecurity[PKCS11]
-/opt/eduid/bin/pip install -i https://pypi.nordu.net/simple/ requests
+PYPI="https://pypi.nordu.net/simple/"
+ping -c 1 -q pypiserver.docker && PYPI="http://pypiserver.docker:8080/simple/"
+
+echo "#############################################################"
+echo "$0: Using PyPi URL ${PYPI}"
+echo "#############################################################"
+
+/opt/eduid/bin/pip install --pre -i ${PYPI} eduid-idp
+/opt/eduid/bin/pip install --pre -i ${PYPI} eduid-idp-html
+/opt/eduid/bin/pip install       -i ${PYPI} raven
+/opt/eduid/bin/pip install       -i ${PYPI} pyXMLSecurity[PKCS11]
+/opt/eduid/bin/pip install       -i ${PYPI} requests
 
 /opt/eduid/bin/pip freeze
