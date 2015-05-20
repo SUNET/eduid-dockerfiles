@@ -20,7 +20,8 @@ apt-get -y install \
     xmlsec1 \
     libxml2-utils \
     libffi-dev \
-    libssl-dev
+    libssl-dev \
+    softhsm
 apt-get clean
 rm -rf /var/lib/apt/lists/*
 
