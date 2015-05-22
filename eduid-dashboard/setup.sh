@@ -31,3 +31,7 @@ echo "#############################################################"
 /opt/eduid/bin/pip install       -i ${PYPI} raven
 
 /opt/eduid/bin/pip freeze
+
+echo "$0: Downloading stathat.py directly from Github. Check if stathat==0.0.3 has been released yet!"
+wget -O /opt/eduid/local/lib/python2.7/site-packages/stathat.py \
+    https://raw.githubusercontent.com/kennethreitz/stathat.py/master/stathat.py
