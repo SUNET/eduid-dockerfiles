@@ -32,6 +32,11 @@ echo "#############################################################"
 
 /opt/eduid/bin/pip freeze
 
-echo "$0: Downloading stathat.py directly from Github. Check if stathat==0.0.3 has been released yet!"
-wget -O /opt/eduid/local/lib/python2.7/site-packages/stathat.py \
-    https://raw.githubusercontent.com/kennethreitz/stathat.py/master/stathat.py
+echo "$0: Replacing stathat.py and stathatasync.py"
+find /opt/eduid/lib -name stathat.py -ls
+find /opt/eduid/lib -name stathat.py -exec cp /root/stathat.py {} \;
+find /opt/eduid/lib -name stathat.py -ls
+
+find /opt/eduid/lib -name stathatasync.py -ls
+find /opt/eduid/lib -name stathatasync.py -exec cp /root/stathatasync.py {} \;
+find /opt/eduid/lib -name stathatasync.py -ls
