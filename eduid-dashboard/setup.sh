@@ -31,12 +31,3 @@ echo "#############################################################"
 /opt/eduid/bin/pip install       -i ${PYPI} raven
 
 /opt/eduid/bin/pip freeze
-
-echo "$0: Replacing stathat.py and stathatasync.py"
-find /opt/eduid/lib -name stathat.py -ls
-find /opt/eduid/lib -name stathat.py -exec cp /root/stathat.py {} \;
-find /opt/eduid/lib -name stathat.py -ls
-
-find /opt/eduid/lib -name stathatasync.py -ls
-find /opt/eduid/lib -name stathatasync.py -exec cp /root/stathatasync.py {} \;
-find /opt/eduid/lib -name stathatasync.py -ls
