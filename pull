@@ -1,0 +1,30 @@
+#!/bin/bash
+
+set -e
+
+if [ "x$1" = "x" ]; then
+    echo "Syntax: $0 image ..."
+    exit 1
+fi
+
+if [ $(id -u) -ne 0 ]; then
+    # check if non-root user is member of the group 'docker', in which case
+    # sudo is assumed to not be necessary
+    if ! id | grep -q docker; then
+        sudo="sudo"
+    fi
+fi
+
+for this in $*; do
+    dir=$(echo ${this} | awk -F : '{print $1}')
+    test -d ${dir} || echo "Error: ${image} (subdirectory $dir) not found"
+    test -d ${dir} || exit 1
+done
+
+for this in $*; do
+    image=$(echo $this | sed -e 's!/*$!!')    # remove trailing slashes
+    echo "Pulling ${image}:latest"
+    ${sudo} docker pull "docker.sunet.se/eduid/${image}"
+    echo "Pulling ${image}:stable"
+    ${sudo} docker pull "docker.sunet.se/eduid/${image}:stable"
+done
