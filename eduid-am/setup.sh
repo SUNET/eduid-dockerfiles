@@ -9,7 +9,7 @@ echo "#############################################################"
 echo "$0: Using PyPi URL ${PYPI}"
 echo "#############################################################"
 
-/opt/eduid/bin/pip install --pre -i ${PYPI} 'eduid-am<=0.5.9'
+/opt/eduid/bin/pip install --pre -i ${PYPI} 'eduid-am'
 # eduid-api currently doesn't do attribute updating
 #/opt/eduid/bin/pip install -i https://pypi.nordu.net/simple/ eduid-api-amp
 /opt/eduid/bin/pip install       -i ${PYPI} eduid-signup-amp
