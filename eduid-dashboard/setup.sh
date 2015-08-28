@@ -25,7 +25,7 @@ ping -c 1 -q pypiserver.docker && PYPI="http://pypiserver.docker:8080/simple/"
 echo "#############################################################"
 echo "$0: Using PyPi URL ${PYPI}"
 echo "#############################################################"
-/opt/eduid/bin/pip install --pre -i ${PYPI} eduid-am==0.5.4.2
+/opt/eduid/bin/pip install --pre -i ${PYPI} eduid-am
 /opt/eduid/bin/pip install --pre -i ${PYPI} eduid-dashboard
 /opt/eduid/bin/pip install --pre -i ${PYPI} eduid-lookup-mobile
 /opt/eduid/bin/pip install       -i ${PYPI} raven
