@@ -42,6 +42,10 @@ chmod 660 "${logfile}"
 
 cd "${cfg_dir}"
 
+# nice to have in docker run output, to check what
+# version of something is actually running.
+/opt/eduid/bin/pip freeze
+
 echo "$0: Starting Celery app '${app_name}' in directory ${cfg_dir}"
 exec celery worker --app="${app_name}" --events --uid eduid --gid eduid \
     --logfile="${logfile}" \
