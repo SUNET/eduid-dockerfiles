@@ -37,5 +37,6 @@ echo "#############################################################"
 /opt/eduid/bin/pip install       -i ${PYPI} raven
 /opt/eduid/bin/pip install       -i ${PYPI} pyXMLSecurity[PKCS11]
 /opt/eduid/bin/pip install       -i ${PYPI} requests
+/opt/eduid/bin/pip install --pre -i ${PYPI} eduid_action.tou
 
 /opt/eduid/bin/pip freeze
