@@ -4,8 +4,10 @@ set -e
 set -x
 
 apt-get update
+# To get Pillow zip compression and jpeg support (mandatory)
 apt-get -y install \
-    zlib1g-dev		# To get PIL zip compression
+    zlib1g-dev \
+    libjpeg8-dev
 apt-get clean
 rm -rf /var/lib/apt/lists/*
 
