@@ -11,6 +11,6 @@ ADD start.sh /start.sh
 
 WORKDIR /
 
-EXPOSE 8081
+EXPOSE 8080
 
 CMD ["bash", "/start.sh"]
