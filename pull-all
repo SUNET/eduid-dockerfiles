@@ -1,0 +1,5 @@
+#!/bin/bash
+
+set -e
+
+find . -name "eduid*" -type d -print0 | sed 's/.\///g' | xargs -0 -I% ./pull %
