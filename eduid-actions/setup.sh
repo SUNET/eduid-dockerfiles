@@ -14,6 +14,6 @@ echo "#############################################################"
 /opt/eduid/bin/pip install --pre -i ${PYPI} eduid-actions
 /opt/eduid/bin/pip install --pre -i ${PYPI} eduid_action.tou
 /opt/eduid/bin/pip install       -i ${PYPI} raven
-/opt/eduid/bin/pip install       -i ${PYPI} gunicorn
+/opt/eduid/bin/pip install       -i ${PYPI} gunicorn==19.3.0
 
 /opt/eduid/bin/pip freeze
