@@ -13,7 +13,7 @@ RUN /opt/eduid/setup.sh
 
 ADD start.sh /start.sh
 
-ADD html.conf /opt/eduid/sites-available/html.conf
+ADD html.conf /etc/nginx/sites-enabled/html.conf
 
 WORKDIR /
 
