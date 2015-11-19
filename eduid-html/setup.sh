@@ -13,9 +13,6 @@ rm -f /etc/nginx/sites-enabled/*
 mkdir -p /opt/eduid/eduid-html/
 cd /opt/eduid/eduid-html/
 git clone https://github.com/SUNET/eduid-html.git wwwroot
-# tmp change branch
-cd /opt/eduid/eduid-html/wwwroot
-git checkout tmp_new_design
 
 # save space
 rm -rf /var/lib/apt/lists/*
