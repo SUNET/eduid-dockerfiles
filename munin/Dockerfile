@@ -1,8 +1,8 @@
-FROM docker.sunet.se/eduid/pythonenv
+FROM ubuntu:14.04
 
 MAINTAINER eduid-dev <eduid-dev@SEGATE.SUNET.SE>
 
-VOLUME ["/opt/eduid/nagios3/etc", "/opt/eduid/src", "/var/log/eduid", "/var/run/nagios3"]
+VOLUME ["/etc/munin", "/var/run/munin" ]
 
 ADD setup.sh /opt/eduid/setup.sh
 RUN /opt/eduid/setup.sh

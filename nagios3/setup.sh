@@ -14,7 +14,8 @@ apt-get -y install \
     libnagios-plugin-perl \
     nagios-nrpe-plugin \
     nagios-plugins-contrib \
-    nsca-client
+    nsca-client \
+    sendemail
 
 apt-get clean
 rm -rf /var/lib/apt/lists/*
