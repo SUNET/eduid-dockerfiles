@@ -29,8 +29,6 @@ fi
 
 echo ""
 echo "$0: Starting ${run} with config ${ini}"
-start-stop-daemon --start -c eduid:eduid --exec \
+exec start-stop-daemon --start -c eduid:eduid --exec \
      /opt/eduid/bin/python -- $run \
     --config-file ${ini}
-
-echo $0: Exiting

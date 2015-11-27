@@ -40,10 +40,8 @@ if [ ! -s "${metadata}" ]; then
 fi
 
 echo "$0: pserving ${ini}"
-start-stop-daemon --start -c eduid:eduid --exec \
+exec start-stop-daemon --start -c eduid:eduid --exec \
      /opt/eduid/bin/pserve -- "${ini}" \
      --pid-file "${state_dir}/${eduid-name}.pid" \
      --log-file "${log_dir}/${eduid_name}.log" \
     --user=eduid --group=eduid $pserve_args
-
-echo $0: Exiting

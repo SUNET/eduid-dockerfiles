@@ -22,9 +22,7 @@ chown eduid: "${log_dir}"
 
 echo ""
 echo "$0: Starting ${run}"
-${run} --fallback-url https://pypi.nordu.net/simple/ \
+exec ${run} --fallback-url https://pypi.nordu.net/simple/ \
     --log-file "${log_dir}/pypiserver.log" \
     -v -v \
     $packages_dir
-
-echo $0: Exiting
