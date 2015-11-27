@@ -16,5 +16,8 @@ git clone https://github.com/SUNET/eduid-html.git wwwroot
 
 # save space
 rm -rf /var/lib/apt/lists/*
+rm -f /opt/eduid/eduid-html/wwwroot/Gruntfile.js
+rm -f /opt/eduid/eduid-html/wwwroot/package.json
+rm -rf /opt/eduid/eduid-html/wwwroot/assets/sass/
 
 echo -e "\ndaemon off;" >> /etc/nginx/nginx.conf
