@@ -10,6 +10,9 @@ base_dir=${base_dir-"/opt/eduid/${eduid_name}"}
 cfg_dir=${cfg_dir-"/etc/unbound"}
 extra_args=${extra_args-''}
 verbose=${verbose-'-v'}
+unbound_interface=${unbound_interface-'127.0.0.1'}
+
+sed -ie "s/UNBOUND_INTERFACE/${unbound_interface}/g" "${cfg_dir}/unbound.conf"
 
 echo "$0: Unbound config"
 cat "${cfg_dir}/unbound.conf"
