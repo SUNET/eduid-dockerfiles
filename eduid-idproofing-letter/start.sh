@@ -13,9 +13,9 @@ base_dir=${base_dir-"/opt/eduid/${eduid_name}"}
 cfg_dir=${cfg_dir-"${base_dir}/etc"}
 log_dir=${log_dir-'/var/log/eduid'}
 state_dir=${state_dir-"${base_dir}/run"}
-gunicorn_args="--bind 0.0.0.0:8080 ${app_name}:app"
+gunicorn_args="--bind 0.0.0.0:8080 -w 8 -t 120 ${app_name}:app"
 
-chown eduid: "${log_dir}"
+chown eduid: "${log_dir}" "${state_dir}"
 
 # nice to have in docker run output, to check what
 # version of something is actually running.
