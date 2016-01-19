@@ -13,7 +13,9 @@ base_dir=${base_dir-"/opt/eduid/${eduid_name}"}
 cfg_dir=${cfg_dir-"${base_dir}/etc"}
 log_dir=${log_dir-'/var/log/eduid'}
 state_dir=${state_dir-"${base_dir}/run"}
-gunicorn_args="--bind 0.0.0.0:8080 -w 8 -t 120 ${app_name}:app"
+workers=${workers-4}
+worker_timeout=${worker_timeout-120}
+gunicorn_args="--bind 0.0.0.0:8080 -w ${workers} -t ${worker_timeout} ${app_name}:app"
 
 chown eduid: "${log_dir}" "${state_dir}"
 
