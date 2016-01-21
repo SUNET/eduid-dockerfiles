@@ -4,34 +4,30 @@
 # initial copy from https://github.com/dockerfile/redis
 #
 
-# Pull base image.
-FROM dockerfile/ubuntu
+FROM ubuntu:14.04
 
-# Install Redis.
-RUN \
-  cd /tmp && \
-  wget http://download.redis.io/redis-stable.tar.gz && \
-  tar xvzf redis-stable.tar.gz && \
-  cd redis-stable && \
-  make && \
-  make install && \
-  cp -f src/redis-sentinel /usr/local/bin && \
-  mkdir -p /etc/redis && \
-  cp -f *.conf /etc/redis && \
-  rm -rf /tmp/redis-stable* && \
-  sed -i 's/^\(bind .*\)$/# \1/' /etc/redis/redis.conf && \
-  sed -i 's/^\(daemonize .*\)$/# \1/' /etc/redis/redis.conf && \
-  sed -i 's/^\(dir .*\)$/# \1\ndir \/data/' /etc/redis/redis.conf && \
-  sed -i 's/^\(logfile .*\)$/# \1/' /etc/redis/redis.conf
+MAINTAINER eduid-dev <eduid-dev@SEGATE.SUNET.SE>
+
+RUN apt-get update && apt-get install -y \
+  redis-server \
+  locales
+
+RUN mkdir -p /opt/eduid
+
+ENV LANG C.UTF-8
+ENV LANGUAGE C.UTF-8
+ENV LC_ALL C.UTF-8
 
 # Define mountable directories.
-VOLUME ["/data"]
+VOLUME ["/data", "/var/log/redis", "/opt/eduid/etc"]
 
 # Define working directory.
 WORKDIR /data
 
 # Define default command.
-CMD ["redis-server", "/etc/redis/redis.conf"]
+ADD start.sh /start.sh
+
+CMD ["bash", "/start.sh"]
 
 # Expose ports.
 EXPOSE 6379
