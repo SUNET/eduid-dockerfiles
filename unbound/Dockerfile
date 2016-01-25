@@ -7,9 +7,11 @@ VOLUME [ "/etc/unbound" ]
 EXPOSE 53
 EXPOSE 8953
 
+ADD start.sh /start.sh
 ADD setup.sh /opt/eduid/setup.sh
 RUN /opt/eduid/setup.sh
+ADD unbound.conf /etc/unbound/unbound.conf
 
 WORKDIR /
 
-CMD ["/usr/sbin/unbound", "-dvvvc", "/etc/unbound/unbound.conf"]
+CMD ["bash", "/start.sh"]
