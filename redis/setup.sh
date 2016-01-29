@@ -5,7 +5,8 @@ set -x
 
 apt-get update
 apt-get -y install \
-    redis-server
+    redis-server \
+    sysvbanner
 apt-get clean
 rm -rf /var/lib/apt/lists/*
 
