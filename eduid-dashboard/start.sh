@@ -44,4 +44,4 @@ exec start-stop-daemon --start -c eduid:eduid --exec \
      /opt/eduid/bin/pserve -- "${ini}" \
      --pid-file "${state_dir}/${eduid-name}.pid" \
      --log-file "${log_dir}/${eduid_name}.log" \
-    --user=eduid --group=eduid $pserve_args
+    $pserve_args
