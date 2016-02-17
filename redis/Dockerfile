@@ -1,4 +1,4 @@
-FROM	    docker.sunet.se/eduid/pythonenv:15.10
+FROM	    docker.sunet.se/eduid/pythonenv
 ADD         setup.sh /setup.sh
 RUN	    /setup.sh
 EXPOSE      6379
