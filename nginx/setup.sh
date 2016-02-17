@@ -2,6 +2,8 @@
 
 set -e
 
+apt-get update
+apt-get -y dist-upgrade
 apt-get -y install \
     nginx
 

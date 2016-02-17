@@ -4,6 +4,7 @@ set -e
 set -x
 
 apt-get update
+apt-get -y dist-upgrade
 apt-get -y install \
     unbound
 
