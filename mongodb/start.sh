@@ -7,7 +7,7 @@ echo "$0: Starting mongod into background"
 sleep 2
 
 if [ -x /opt/eduid/db-scripts/createUsers.sh ]; then
-    echo "$0: Creating eduid users using /opt/eduid/db-scripts"
+    echo "$0: Creating eduid users using /opt/eduid/db-scripts/createUsers.sh"
     /opt/eduid/db-scripts/createUsers.sh
 else
     echo "$0: /opt/eduid/db-scripts/createUsers.sh not executable"
