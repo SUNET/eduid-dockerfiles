@@ -21,7 +21,8 @@ gunicorn_args="--bind 0.0.0.0:8080 -w ${workers} -t ${worker_timeout} eduid_weba
 
 chown eduid: "${log_dir}" "${state_dir}"
 
-export PYTHONPATH="${PYTHONPATH}:${project_dir}"
+# set PYTHONPATH if it is not already set using Docker environment
+export PYTHONPATH=${PYTHONPATH-${project_dir}}
 
 # nice to have in docker run output, to check what
 # version of something is actually running.
