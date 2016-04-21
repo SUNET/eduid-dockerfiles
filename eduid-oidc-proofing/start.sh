@@ -9,7 +9,7 @@ set -x
 eduid_name=${eduid_name-'oidc-proofing'}
 app_name=${app_name-'oidc_proofing'}
 base_dir=${base_dir-"/opt/eduid"}
-project_dir=${project_dir-"${base_dir}/eduid-webapp/src/eduid_webapp"}
+project_dir=${project_dir-"${base_dir}/eduid-webapp/src"}
 app_dir=${app_dir-"${project_dir}/${app_name}"}
 # These *can* be set from Puppet, but are less expected to...
 config_ns=/eduid/webapp/${app_name}
