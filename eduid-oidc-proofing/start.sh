@@ -16,8 +16,9 @@ config_ns=/eduid/webapp/${app_name}
 log_dir=${log_dir-'/var/log/eduid'}
 state_dir=${state_dir-"${base_dir}/run"}
 workers=${workers-1}
+worker_class=${worker_class-sync}
 worker_timeout=${worker_timeout-30}
-gunicorn_args="--bind 0.0.0.0:8080 -w ${workers} -t ${worker_timeout} eduid_webapp.oidc_proofing.run:app"
+gunicorn_args="--bind 0.0.0.0:8080 -w ${workers} -k ${worker_class} -t ${worker_timeout} eduid_webapp.oidc_proofing.run:app"
 
 chown eduid: "${log_dir}" "${state_dir}"
 
