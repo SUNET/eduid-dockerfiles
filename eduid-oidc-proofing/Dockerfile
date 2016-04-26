@@ -1,4 +1,4 @@
-FROM docker.sunet.se/eduid/webapp
+FROM docker.sunet.se/eduid/eduid-webapp
 
 ADD start.sh /start.sh
 
