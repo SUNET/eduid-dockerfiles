@@ -2,7 +2,9 @@
 
 set -e
 
-apt-get -y install \
+export DEBIAN_FRONTEND=noninteractive
+
+apt-get update && apt-get -y install \
     git-core \
     nginx
 
