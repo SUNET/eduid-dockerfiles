@@ -1,9 +1,14 @@
 FROM docker.sunet.se/eduid/eduid-webapp
 
-ADD start.sh /start.sh
+MAINTAINER eduid-dev <eduid-dev@SEGATE.SUNET.SE>
 
-WORKDIR /
+ADD setup.sh /opt/eduid/prepare.sh
+RUN /opt/eduid/prepare.sh
+
+WORKDIR /opt/eduid
 
 EXPOSE 8080
+
+ADD start.sh /start.sh
 
 CMD ["bash", "/start.sh"]
