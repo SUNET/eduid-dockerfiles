@@ -12,7 +12,6 @@ project_dir="${project_dir-${base_dir}/eduid-webapp/src}"
 cfg_dir="${cfg_dir-${base_dir}/etc}"
 log_dir="${log_dir-${base_dir}/log}"
 state_dir="${state_dir-${base_dir}/run}"
-# config="${ini-${cfg_dir}/${eduid_name}.ini}"
 saml2_settings="${saml2_settings-${cfg_dir}/saml2_settings.py}"
 run="${state_dir}/${eduid_name}.pid"
 workers="${workers-1}"
@@ -21,10 +20,6 @@ worker_threads="${worker_threads-1}"
 worker_timeout="${worker_timeout-30}"
 
 chown eduid: "${log_dir}" "${state_dir}"
-
-# || true to not fail on read-only cfg_dir
-# chgrp eduid "${ini}" || true
-# chmod 640 "${ini}" || true
 
 # set PYTHONPATH if it is not already set using Docker environment
 export PYTHONPATH=${PYTHONPATH-${project_dir}}
