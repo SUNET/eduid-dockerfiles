@@ -1,2 +1,9 @@
 *~
-*#
+\#*
+.*~
+*/run
+*/log
+*.pyc
+.*.swp
+.*.swo
+sources
