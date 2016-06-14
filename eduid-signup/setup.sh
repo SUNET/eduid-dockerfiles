@@ -2,7 +2,15 @@
 
 set -e
 
-#apt-get -y install \
+apt-get update
+apt-get -y dist-upgrade
+apt-get -y install \
+    git \
+    libssl-dev \
+    libffi-dev
+
+apt-get clean
+rm -rf /var/lib/apt/lists/*
 
 PYPI="https://pypi.nordu.net/simple/"
 ping -c 1 -q pypiserver.docker && PYPI="http://pypiserver.docker:8080/simple/"
