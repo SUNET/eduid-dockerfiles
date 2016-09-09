@@ -42,5 +42,5 @@ for this in $*; do
         ${sudo} docker rmi "eduid/${image}" "docker.sunet.se/eduid/${image}" || true
     fi
     ${sudo} docker build $build_opts --force-rm=true -t="eduid/${image}" "${dir}"
-    ${sudo} docker tag -f "eduid/${image}" "docker.sunet.se/eduid/${image}"
+    ${sudo} docker tag "eduid/${image}" "docker.sunet.se/eduid/${image}"
 done
