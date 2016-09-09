@@ -3,6 +3,7 @@
 set -e
 
 virtualenv /opt/eduid
+/opt/eduid/bin/pip install -U pip
 
 addgroup --system eduid
 
