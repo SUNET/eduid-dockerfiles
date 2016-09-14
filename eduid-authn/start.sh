@@ -13,6 +13,7 @@ cfg_dir="${cfg_dir-${base_dir}/etc}"
 log_dir="${log_dir-${base_dir}/log}"
 state_dir="${state_dir-${base_dir}/run}"
 saml2_settings="${saml2_settings-${cfg_dir}/saml2_settings.py}"
+metadata=${metadata-"${state_dir}/metadata.xml"}
 run="${state_dir}/${eduid_name}.pid"
 workers="${workers-1}"
 worker_class="${worker_class-sync}"
@@ -29,6 +30,13 @@ echo "PYTHONPATH=${PYTHONPATH}"
 # nice to have in docker run output, to check what
 # version of something is actually running.
 /opt/eduid/bin/pip freeze
+
+if [ ! -s "${metadata}" ]; then
+    # Create file with local SP metadata
+    cd "${cfg_dir}" && \
+    /opt/eduid/bin/make_metadata.py "${saml2_settings}" | \
+    xmllint --format - > "${metadata}"
+fi
 
 extra_args=""
 if [ -f "/opt/eduid/src/eduid-webapp/setup.py" ]; then
