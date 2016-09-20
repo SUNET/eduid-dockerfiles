@@ -62,6 +62,15 @@ def main():
                 "\n"
                 "with path('/authenticate') as r:\n"
                 "    r.body(json.dumps({'auth_response': {'version': 1, 'authenticated': True,}}))\n"
+                "\n"
+                # Mock oidc-proofing respons
+                "with path('/services/oidc-proofing/proofing') as r:\n"
+                "    r.body(json.dumps({'payload': {\n"
+                "         'nonce': 'da1461ee-711a-44fd-a31a-c2b28892fe05',\n"
+                "         'qr_img': '<img src=\"data:image/png;base64, mock_image_data\"/>'\n"
+                "      },\n"
+                "      'type': 'POST_OPENID_SUCCESS'\n"
+                "     }))\n"
                 )
 
     while True:
