@@ -1,10 +1,10 @@
-FROM ubuntu:15.10
+FROM ubuntu:16.04
 
 MAINTAINER eduid-dev <eduid-dev@SEGATE.SUNET.SE>
 
 ENV DEBIAN_FRONTEND noninteractive
 
-RUN /bin/echo -e "deb http://se.archive.ubuntu.com/ubuntu wily main restricted universe\ndeb http://archive.ubuntu.com/ubuntu wily-updates main restricted universe\ndeb http://security.ubuntu.com/ubuntu wily-security main restricted universe" > /etc/apt/sources.list
+RUN /bin/echo -e "deb http://se.archive.ubuntu.com/ubuntu xenial main restricted universe\ndeb http://archive.ubuntu.com/ubuntu xenial-updates main restricted universe\ndeb http://security.ubuntu.com/ubuntu xenial-security main restricted universe" > /etc/apt/sources.list
 
 RUN apt-get update && \
     apt-get -y dist-upgrade && \
