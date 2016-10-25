@@ -69,4 +69,6 @@ chgrp eduid "${mm_properties}" || true
 chmod 640 "${mm_properties}" || true
 
 echo "$0: Starting JAR ${mm_jarfile} (properties file: ${mm_properties})"
-exec start-stop-daemon --start -c eduid --exec /usr/bin/java -- -jar "${mm_jarfile}" -c "${mm_properties}"
+exec start-stop-daemon --start --quiet -c eduid:eduid \
+     --pidfile "${state_dir}/${eduid_name}.pid" --make-pidfile \
+     --exec /usr/bin/java -- -jar "${mm_jarfile}" -c "${mm_properties}"

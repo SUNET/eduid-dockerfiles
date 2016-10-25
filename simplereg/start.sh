@@ -47,7 +47,8 @@ chown -R eduid: "${log_dir}"
 
 echo ""
 echo "$0: Starting ${run}"
-exec start-stop-daemon --start -c ${runas_user}:${runas_group} --exec \
-     /opt/eduid/bin/python -- "${run}" \
-    log \
-    ${extra_args}
+exec start-stop-daemon --start --quiet -c ${runas_user}:${runas_group} \
+     --pidfile "${state_dir}/${eduid_name}.pid" --make-pidfile \
+     --exec /opt/eduid/bin/python -- ${run} \
+     log \
+     ${extra_args}

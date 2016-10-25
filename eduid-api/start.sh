@@ -54,7 +54,8 @@ fi
 
 echo ""
 echo "$0: Starting ${run} with config ${ini}"
-exec start-stop-daemon --start -c eduid:eduid --exec \
-     /opt/eduid/bin/python -- "${run}" \
-    --config-file "${ini}" \
-    ${extra_args}
+exec start-stop-daemon --start --quiet -c eduid:eduid \
+     --pidfile "${state_dir}/${eduid_name}.pid" --make-pidfile \
+     --exec /opt/eduid/bin/python -- ${run} \
+     --config-file ${ini} \
+     ${extra_args}

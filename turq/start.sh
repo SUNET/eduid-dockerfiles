@@ -4,4 +4,4 @@ set -e
 
 . /opt/eduid/bin/activate
 
-exec sudo -u eduid /run_turq
+exec start-stop-daemon --start -c eduid:eduid --exec /run_turq
