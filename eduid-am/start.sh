@@ -18,7 +18,7 @@ logfile=${logfile-"${log_dir}/${eduid_name}.log"}
 #state_dir=${state_dir-"${base_dir}/run"}
 #celerybeat_file=${celerybeat_file-"${state_dir}/celerybeat-schedule"}
 
-chown eduid: "${log_dir}" #"${state_dir}"
+chown -R eduid: "${log_dir}" #"${state_dir}"
 
 # || true to not fail on read-only cfg_dir
 chgrp eduid "${ini}" || true

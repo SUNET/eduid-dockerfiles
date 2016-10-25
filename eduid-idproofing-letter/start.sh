@@ -17,7 +17,7 @@ workers=${workers-1}
 worker_timeout=${worker_timeout-30}
 gunicorn_args="--bind 0.0.0.0:8080 -w ${workers} -t ${worker_timeout} ${app_name}.run:app"
 
-chown eduid: "${log_dir}" "${state_dir}"
+chown -R eduid: "${log_dir}" "${state_dir}"
 
 # nice to have in docker run output, to check what
 # version of something is actually running.

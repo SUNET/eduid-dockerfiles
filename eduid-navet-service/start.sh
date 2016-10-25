@@ -23,7 +23,7 @@ navet_jar_file=${navet_jar_file-'/opt/eduid/eduid-navet-service-0.1-SNAPSHOT.jar
 
 # Variables mm_truststore_file and mm_keystore_file are required when generating truststore and keystore
 
-chown eduid: "${navet_state_dir}"
+chown -R eduid: "${navet_state_dir}"
 
 ls -l "${navet_etcdir}"
 

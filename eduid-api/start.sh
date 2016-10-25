@@ -15,7 +15,7 @@ ini=${ini-"${cfg_dir}/${eduid_name}.ini"}
 run=${run-'/opt/eduid/bin/eduid_api'}
 extra_args=${extra_args-''}
 
-chown eduid: "${log_dir}"
+chown -R eduid: "${log_dir}"
 
 # || true to not fail on read-only cfg_dir
 chgrp eduid "${ini}" || true

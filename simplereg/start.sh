@@ -19,7 +19,7 @@ extra_args=${extra_args-''}
 runas_user=${runas_user-'root'}
 runas_group=${runas_group-'root'}
 
-chown eduid: "${log_dir}"
+chown -R eduid: "${log_dir}"
 
 # Look for executable in developers environment
 #if [ "x${PYTHONPATH}" != "x" ]; then

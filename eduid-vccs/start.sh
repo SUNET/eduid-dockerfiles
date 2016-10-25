@@ -14,7 +14,7 @@ log_dir=${log_dir-'/var/log/eduid'}
 ini=${ini-"${cfg_dir}/${eduid_name}.ini"}
 run=${run-'/opt/eduid/bin/vccs_authbackend'}
 
-chown eduid: "${log_dir}"
+chown -R eduid: "${log_dir}"
 
 # || true to not fail on read-only cfg_dir
 chgrp eduid "${ini}" || true

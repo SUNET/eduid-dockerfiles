@@ -20,7 +20,7 @@ worker_class="${worker_class-sync}"
 worker_threads="${worker_threads-1}"
 worker_timeout="${worker_timeout-30}"
 
-chown eduid: "${log_dir}" "${state_dir}"
+chown -R eduid: "${log_dir}" "${state_dir}"
 
 # set PYTHONPATH if it is not already set using Docker environment
 export PYTHONPATH=${PYTHONPATH-${project_dir}}

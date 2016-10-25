@@ -14,7 +14,7 @@ log_dir=${log_dir-'/var/log/eduid'}
 state_dir=${state_dir-"${base_dir}/run"}
 ini=${ini-"${cfg_dir}/${eduid_name}.ini"}
 
-chown eduid: "${log_dir}" "${state_dir}"
+chown -R eduid: "${log_dir}" "${state_dir}"
 
 # || true to not fail on read-only cfg_dir
 chgrp eduid "${ini}" || true

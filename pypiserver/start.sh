@@ -14,7 +14,7 @@ log_dir=${log_dir-"/var/log/${eduid_name}"}
 extra_args=${extra_args-''}
 run=${run-'/opt/eduid/bin/pypi-server'}
 
-chown eduid: "${log_dir}"
+chown -R eduid: "${log_dir}"
 
 # nice to have in docker run output, to check what
 # version of something is actually running.

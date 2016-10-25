@@ -18,7 +18,7 @@ pysaml2_settings=${pysaml2_settings-"${cfg_dir}/idp_pysaml2_settings.py"}
 run=${run-'/opt/eduid/bin/eduid_idp'}
 extra_args=${extra_args-''}
 
-chown eduid: "${log_dir}" "${state_dir}"
+chown -R eduid: "${log_dir}" "${state_dir}"
 
 # || true to not fail on read-only cfg_dir
 chgrp eduid "${ini}" || true

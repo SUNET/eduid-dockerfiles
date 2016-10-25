@@ -2,5 +2,5 @@
 
 set -e
 
-chown www-data: /var/log/nginx
+chown -R www-data: /var/log/nginx
 

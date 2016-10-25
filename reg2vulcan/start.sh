@@ -18,7 +18,7 @@ pysaml2_settings=${pysaml2_settings-"${cfg_dir}/idp_pysaml2_settings.py"}
 run=${run-'/opt/eduid/bin/reg2vulcan'}
 extra_args=${extra_args-''}
 
-chown eduid: "${log_dir}"
+chown -R eduid: "${log_dir}"
 
 # || true to not fail on read-only cfg_dir
 chgrp eduid "${ini}" || true
