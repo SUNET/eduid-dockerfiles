@@ -6,7 +6,7 @@ set -x
 apt-get update
 apt-get -y install \
     fcgiwrap \
-    php5-fpm \
+    php-fpm \
     supervisor \
     nagios3 \
     libjson-perl \
