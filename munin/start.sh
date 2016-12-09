@@ -10,12 +10,12 @@ base_dir=${base_dir-"/opt/eduid/${eduid_name}"}
 cfg_dir=${cfg_dir-"${base_dir}/etc"}
 log_dir=${log_dir-'/var/log/munin'}
 state_dir=${state_dir-"${base_dir}/run"}
-fastcgi_dir=${fastcgi_dir-"/var/run/munin/fastcgi/"}
+run_dir=${run_dir-"/var/run/munin"}
 extra_args=${extra_args-''}
 
-mkdir -p "${fastcgi_dir}"
+mkdir -p "${run_dir}"
 
-for dir in "${log_dir}" "${state_dir}" "${fastcgi_dir}"; do
+for dir in "${log_dir}" "${state_dir}" "${run_dir}"; do
     test -d "${dir}" && chown -R munin: "${dir}"
 done
 
