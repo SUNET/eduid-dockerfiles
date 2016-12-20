@@ -1,4 +1,4 @@
-FROM ubuntu:14.04
+FROM ubuntu:16.04
 
 MAINTAINER eduid-dev <eduid-dev@SEGATE.SUNET.SE>
 
@@ -10,9 +10,12 @@ RUN /opt/eduid/setup.sh
 ADD start.sh /start.sh
 
 ADD supervisord.conf /etc/supervisor/conf.d/supervisord.conf
-ADD www.conf /etc/php5/fpm/pool.d/www.conf
-
 
 WORKDIR /
+
+# fastcgi for munin-cgi-html
+EXPOSE 9000
+# fastcgi for munin-cgi-graph
+EXPOSE 9001
 
 CMD ["bash", "/start.sh"]

@@ -27,4 +27,7 @@ done
 # version of something is actually running.
 /opt/eduid/bin/pip freeze
 
+# for the pid file
+mkdir -p /run/php
+
 exec /usr/bin/supervisord -c /etc/supervisor/conf.d/supervisord.conf

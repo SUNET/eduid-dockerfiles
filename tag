@@ -1,4 +1,7 @@
 #!/bin/bash
+#
+# Tag the locally built 'latest' with a new tag.
+#
 
 set -e
 
