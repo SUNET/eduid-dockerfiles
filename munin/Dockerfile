@@ -2,7 +2,7 @@ FROM ubuntu:16.04
 
 MAINTAINER eduid-dev <eduid-dev@SEGATE.SUNET.SE>
 
-VOLUME ["/etc/munin", "/var/run/munin" ]
+VOLUME [ "/var/run/munin" ]
 
 ADD setup.sh /opt/eduid/setup.sh
 RUN /opt/eduid/setup.sh

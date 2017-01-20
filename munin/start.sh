@@ -3,20 +3,24 @@
 set -e
 set -x
 
-# These could be set from Puppet if multiple instances are deployed
-eduid_name=${eduid_name-'munin'}
-base_dir=${base_dir-"/opt/eduid/${eduid_name}"}
-# These *can* be set from Puppet, but are less expected to...
-cfg_dir=${cfg_dir-"${base_dir}/etc"}
 log_dir=${log_dir-'/var/log/munin'}
-state_dir=${state_dir-"${base_dir}/run"}
-run_dir=${run_dir-"/var/run/munin"}
+run_dir=${run_dir-'/var/run/munin'}
+datadir=${datadir-'/var/lib/munin'}
+htmldir=${htmldir-'/var/cache/munin/www'}
+cgitmpdir=${cgitmpdir-'/var/lib/munin/cgi-tmp'}
 extra_args=${extra_args-''}
 
 mkdir -p "${run_dir}"
 
-for dir in "${log_dir}" "${state_dir}" "${run_dir}"; do
+for dir in "${log_dir}" "${run_dir}" "${datadir}" "${htmldir}"; do
     test -d "${dir}" && chown -R munin: "${dir}"
 done
+
+for dir in "${htmldir}" "${cgitmpdir}"; do
+    test -d "${dir}" && chown -R www-data "${dir}"
+done
+
+chown www-data: "${log_dir}"/*graph* || true
+chown www-data: "${log_dir}"/*html* || true
 
 exec /usr/bin/supervisord -c /etc/supervisor/conf.d/supervisord.conf
