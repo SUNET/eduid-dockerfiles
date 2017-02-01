@@ -5,12 +5,6 @@ set -x
 
 . /opt/eduid/bin/activate
 
-# this is a Python module name, so can't have hyphen (also name of .ini file)
-app_name=$(echo $eduid_name | tr "-" "_")
-base_dir=${base_dir-"/opt/eduid/${eduid_name}"}
-# These *can* be set from Puppet, but are less expected to...
-cfg_dir=${cfg_dir-"${base_dir}/etc"}
-ini=${ini-"${cfg_dir}/${app_name}.ini"}
 log_dir=${log_dir-'/var/log/eduid'}
 var_dir=${var_dir-'/var/lib/softhsm'}
 logfile=${logfile-"${log_dir}/${eduid_name}.log"}
@@ -24,11 +18,21 @@ PKCS11SOPIN=${PKCS11SOPIN-'123456'}
 if [ ! -d "${var_dir}/tokens" ]; then
     echo "$0: Initializing SoftHSM token"
     mkdir /var/lib/softhsm/tokens
-    softhsm2-util --init-token --slot 0 --label "py11softhsm token 1" --pin "${PKCS11PIN}" --so-pin "${PKCS11SOPIN}"
+    softhsm2-util --init-token --slot 0 --label "py11softhsm" --pin "${PKCS11PIN}" --so-pin "${PKCS11SOPIN}"
+    if [ -f "${p11softhsm_init_rsa_key}" ]; then
+	echo "$0: Loading private RSA key from ${p11softhsm_init_rsa_key}"
+	tmpder="/dev/shm/py11softhsm_privkey.der"
+	touch ${tmpder}
+	chmod 600 ${tmpder}
+	openssl rsa -inform PEM -outform DER -in "${p11softhsm_init_rsa_key}" -out ${tmpder}
+	pkcs11-tool --module "${p11_module}" --slot 0 --id 1 --label eduid --login --pin "${PKCS11PIN}" \
+		    -y privkey -w ${tmpder}
+	rm ${tmpder}
+    fi
 fi
 
 chown -R eduid: "${log_dir}"
-chown -R eduid:softhsm "${var_dir}"
+chown -R eduid:softhsm "${var_dir}" /etc/softhsm
 find "${var_dir}" -type d -print0 | xargs -0 chmod 750
 find "${var_dir}" -type f -print0 | xargs -0 chmod 640
 
