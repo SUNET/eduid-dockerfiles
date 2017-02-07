@@ -1,6 +1,11 @@
 #!/bin/bash
-
+#
+# Build a LOCAL docker image.
+# After this, your probably want to use ./tag and ./push.
+#
 set -e
+
+. ./common.sh
 
 if [ "x$1" = "x" ]; then
     echo "Syntax: $0 [-f] image ..."
@@ -18,29 +23,37 @@ if [ "x$1" = "x-f" ]; then
     shift
 fi
 
-if [ $(id -u) -ne 0 ]; then
-    # check if non-root user is member of the group 'docker', in which case
-    # sudo is assumed to not be necessary
-    if ! id | grep -q docker; then
-	sudo="sudo"
-    fi
-fi
+sudo=$(get_docker_sudo_command)
+
+check_is_subdirs $*
 
 git pull
 
 for this in $*; do
-    dir=$(echo ${this} | awk -F : '{print $1}')
-    test -d ${dir} || echo "Error: ${image} (subdirectory $dir) not found"
-    test -d ${dir} || exit 1
-done
-
-for this in $*; do
+    ver='latest'
+    local_base=$(get_local_image_base)
     image=$(echo $this | sed -e 's!/*$!!')    # remove trailing slashes
     dir=$(echo ${image} | awk -F : '{print $1}')
-    ./pull ${image}
-    if [ $force -eq 1 ]; then
-        ${sudo} docker rmi "eduid/${image}" "docker.sunet.se/eduid/${image}" || true
+    test -f ${dir}/metadata.sh && . ${dir}/metadata.sh
+
+    if [ -d "${dir}/${ver}" ]; then
+	dir="${dir}/${ver}"
+	test -f ${dir}/metadata.sh && . ${dir}/metadata.sh
     fi
-    ${sudo} docker build $build_opts --force-rm=true -t="eduid/${image}" "${dir}"
-    ${sudo} docker tag "eduid/${image}" "docker.sunet.se/eduid/${image}"
+
+    echo ""
+    echo "###############################################"
+    echo "Building ${local_base}/${image}:${ver}"
+    echo "###############################################"
+    echo ""
+
+    if [ $force -eq 1 ]; then
+        ${sudo} docker rmi "${local_base}/${image}:${ver}" || true
+    fi
+    ${sudo} docker build $build_opts --force-rm=true -t="${local_base}/${image}:${ver}" "${dir}"
+    echo ""
+    echo "###############################################"
+    echo "FINISHED building ${local_base}/${image}:${ver}"
+    echo "###############################################"
+    echo ""
 done
