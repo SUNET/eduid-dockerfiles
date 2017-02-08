@@ -50,10 +50,20 @@ for this in $*; do
     if [ $force -eq 1 ]; then
         ${sudo} docker rmi "${local_base}/${image}:${ver}" || true
     fi
-    ${sudo} docker build $build_opts --force-rm=true -t="${local_base}/${image}:${ver}" "${dir}"
+
+    if [ -x $dir/build.sh ]; then
+	echo ""
+	echo "Using custom build script: $dir/build.sh"
+	echo ""
+	cd $dir
+	./build.sh
+    else
+	${sudo} docker build $build_opts --force-rm=true -t="${local_base}/${image}:${ver}" "${dir}"
+    fi
     echo ""
     echo "###############################################"
     echo "FINISHED building ${local_base}/${image}:${ver}"
     echo "###############################################"
     echo ""
+    docker images ${local_base}/${image}:${ver}
 done
