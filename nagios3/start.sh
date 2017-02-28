@@ -22,7 +22,7 @@ for dir_to_clean in "${cache_dir}" "${checkresult_dir}"; do
     chmod 770 "${dir_to_clean}"
 done
 
-for dir in "${log_dir}" "${state_dir}" "${cache_dir}"; do
+for dir in "${log_dir}" "${state_dir}" "${cache_dir}" "${checkresult_dir}"; do
     test -d "${dir}" && chown -R nagios: "${dir}"
 done
 
