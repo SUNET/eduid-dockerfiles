@@ -13,13 +13,16 @@ cfg_dir=${cfg_dir-"${base_dir}/etc"}
 log_dir=${log_dir-'/var/log/nagios3'}
 state_dir=${state_dir-"${base_dir}/run"}
 cache_dir=${cache_dir-'/var/cache/nagios3'}
+checkresult_dir=${checkresult_dir-'/var/lib/nagios3/spool/checkresults'}
 extra_args=${extra_args-''}
 
-rm -rf "${cache_dir}"
-mkdir -p "${cache_dir}"
-chmod 770 "${cache_dir}"
+for dir_to_clean in "${cache_dir}" "${checkresult_dir}"; do
+    test -d "${dir_to_clean}" && rm -rf "${dir_to_clean}"
+    mkdir -p "${dir_to_clean}"
+    chmod 770 "${dir_to_clean}"
+done
 
-for dir in "${log_dir}" "${state_dir}" "${cache_dir}"; do
+for dir in "${log_dir}" "${state_dir}" "${cache_dir}" "${checkresult_dir}"; do
     test -d "${dir}" && chown -R nagios: "${dir}"
 done
 
