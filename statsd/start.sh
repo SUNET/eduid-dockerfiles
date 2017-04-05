@@ -14,7 +14,7 @@ if [ ! -s /statsd/config.js ]; then
         graphiteHost: process.env.GRAPHITE_HOST || "${graphite_host}",
         port: parseInt(process.env.STATSD_PORT) || ${statsd_port},
         backends: [ "./backends/graphite" ],
-        flushInterval: 60000,
+        flushInterval: parseInt(process.env.FLUSH_INTERVAL) || 60000,
         dumpMessages: true,
         debug: true
     };
