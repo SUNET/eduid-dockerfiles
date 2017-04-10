@@ -7,7 +7,7 @@ chmod 755 /opt/eduid/build.sh
 
 export VIRTUAL_ENV="/opt/eduid/"
 export PIP_DOWNLOAD_CACHE=/var/cache/jenkins/pip
-export PIP_INDEX_URL=https://pypi.nordu.net/simple/
+export PIP_INDEX_URL=https://pypi.sunet.se/simple/
 
 . $VIRTUAL_ENV/bin/activate
 

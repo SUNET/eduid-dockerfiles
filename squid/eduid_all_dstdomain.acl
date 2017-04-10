@@ -8,7 +8,7 @@ get.docker.com
 get.docker.io
 #
 # Allow Python package installation - only in dev environment
-pypi.nordu.net
+pypi.sunet.se
 pypi.python.org
 #
 monitor-fre-1.eduid.se
