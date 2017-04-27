@@ -33,4 +33,9 @@ done
 # for the pid file
 mkdir -p /run/php
 
+# Export static content to nginx container, if data volume mount is present
+test -d /nagios3_data && rsync --delete -va /usr/share/nagios3/htdocs/ /nagios3_data/htdocs
+#test -d /nagios3_data && rsync --delete -va /etc/nagios3/ /nagios3_data/conf   # hope there are no secrets in there
+test -d /nagios3_data && (cd /nagios3_data/ && tar zxvf /stylesheets.tar.gz)   # aaaaaaaaaaaaaaaargh
+
 exec /usr/bin/supervisord -c /etc/supervisor/conf.d/supervisord.conf

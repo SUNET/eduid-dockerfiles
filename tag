@@ -5,25 +5,25 @@
 
 set -e
 
+. ./common.sh
+
 if [ "x$1" = "x" ]; then
-    echo "Syntax: $0 image:tag"
+    echo "Syntax: $0 image:tag ..."
     echo ""
     exit 1
 fi
 
-if [ $(id -u) -ne 0 ]; then
-    sudo="sudo"
-fi
+sudo=$(get_docker_sudo_command)
+
+check_is_subdirs $*
 
 for this in $*; do
-    dir=$(echo ${this} | awk -F : '{print $1}')
-    test -d ${dir} || echo "Error: ${image} (subdirectory $dir) not found"
-    test -d ${dir} || exit 1
-done
-
-for this in $*; do
+    local_base=$(get_local_image_base)
+    base=$(get_repository_image_base)
     image=$(echo $this | cut -s -d: -f1 | sed -e 's!/*$!!')    # remove trailing slashes
     tag=$(echo $this | cut -s -d: -f2)
-    ${sudo} docker tag -f "eduid/${image}" "docker.sunet.se/eduid/${image}:${tag}"
-    echo "Tagged ${tag} set for ${image}."
+
+    docker tag "${local_base}/${image}" "${base}/${image}:${tag}"
+    echo "Tagged ${base}/${image}:${tag} from ${local_base}/${image}"
+    docker images "${base}/${image}:${tag}"
 done

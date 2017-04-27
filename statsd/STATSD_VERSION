@@ -1,0 +1,5 @@
+source metadata.sh
+
+STATSD_VERSION=v${ver}
+STATSD_TAG=${ver}
+STATSD_IMAGE=local/statsd

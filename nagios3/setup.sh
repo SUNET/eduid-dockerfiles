@@ -17,12 +17,13 @@ apt-get -y install \
     nagios-plugins-contrib \
     nsca-client \
     sendemail \
-    curl
+    curl \
+    rsync
 
 apt-get clean
 rm -rf /var/lib/apt/lists/*
 
-PYPI="https://pypi.nordu.net/simple/"
+PYPI="https://pypi.sunet.se/simple/"
 ping -c 1 -q pypiserver.docker && PYPI="http://pypiserver.docker:8080/simple/"
 
 echo "#############################################################"
@@ -40,3 +41,7 @@ mkdir /www
 ln -s /usr/share/nagios3/htdocs /www/nagios3
 #mkdir /www/cgi-bin
 #ln -s /usr/lib/cgi-bin/nagios3 /www/cgi-bin/nagios3
+
+# preserve /etc/nagios3/stylesheets, that start.sh will untar in /nagios3_data/
+# in order for the files to eventually reach the nginx container. ugh.
+(cd /etc/nagios3 && tar zcf /stylesheets.tar.gz stylesheets)
