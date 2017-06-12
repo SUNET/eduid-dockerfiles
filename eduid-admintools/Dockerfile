@@ -9,4 +9,4 @@ ADD start.sh /start.sh
 
 WORKDIR /
 
-CMD ["bash", "/start.sh"]
+ENTRYPOINT ["bash", "/start.sh"]
