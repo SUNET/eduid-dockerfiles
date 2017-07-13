@@ -1,8 +1,7 @@
 #
-# Generic nginx imag for use in different places in eduID.
-#
+# This image includes the static content that is served by eduID
 
-FROM ubuntu:14.04
+FROM debian:stable
 
 MAINTAINER eduid-dev <eduid-dev@SEGATE.SUNET.SE>
 
