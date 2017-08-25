@@ -7,7 +7,7 @@ apt-get update
 # To get Pillow zip compression and jpeg support (mandatory)
 apt-get -y install \
     zlib1g-dev \
-    libjpeg8-dev
+    libjpeg62-turbo-dev
 apt-get clean
 rm -rf /var/lib/apt/lists/*
 
