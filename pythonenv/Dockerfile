@@ -1,10 +1,10 @@
-FROM ubuntu:16.04
+FROM debian:stable
 
 MAINTAINER eduid-dev <eduid-dev@SEGATE.SUNET.SE>
 
 ENV DEBIAN_FRONTEND noninteractive
 
-RUN /bin/echo -e "deb http://se.archive.ubuntu.com/ubuntu xenial main restricted universe\ndeb http://archive.ubuntu.com/ubuntu xenial-updates main restricted universe\ndeb http://security.ubuntu.com/ubuntu xenial-security main restricted universe" > /etc/apt/sources.list
+RUN /usr/bin/sed -i s/deb.debian.org/ftp.se.debian.org/g /etc/apt/sources.list
 
 RUN apt-get update && \
     apt-get -y dist-upgrade && \
