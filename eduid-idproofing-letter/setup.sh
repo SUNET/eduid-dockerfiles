@@ -7,7 +7,7 @@ set -x
 apt-get update
 apt-get -y install \
     libtiff5-dev \
-    libjpeg8-dev \
+    libjpeg62-turbo-dev \
     zlib1g-dev \
     libfreetype6-dev \
     liblcms2-dev \
