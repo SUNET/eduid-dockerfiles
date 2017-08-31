@@ -8,7 +8,7 @@ set -x
 log_dir=${log_dir-'/var/log/eduid'}
 var_dir=${var_dir-'/var/lib/softhsm'}
 logfile=${logfile-"${log_dir}/${eduid_name}.log"}
-p11_module=${p11_module-'/usr/lib/x86_64-linux-gnu/softhsm/libsofthsm2.so'}
+p11_module=${p11_module-'/usr/lib/softhsm/libsofthsm2.so'}
 
 PYELEVEN_ARGS=${PYELEVEN_ARGS-'-w2 --user eduid --group softhsm --reload'}
 PYELEVEN_PORT=${PYELEVEN_PORT-'8000'}
