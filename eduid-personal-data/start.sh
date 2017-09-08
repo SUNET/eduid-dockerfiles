@@ -45,5 +45,6 @@ exec start-stop-daemon --start -c eduid:eduid --exec \
     --threads ${worker_threads} --timeout ${worker_timeout} \
     --access-logfile "${log_dir}/${eduid_name}-access.log" \
     --error-logfile "${log_dir}/${eduid_name}-error.log" \
+    --capture-output \
     --bind 0.0.0.0:8080 \
     ${extra_args} eduid_webapp.personal_data.run:app
