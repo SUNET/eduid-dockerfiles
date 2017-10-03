@@ -17,6 +17,7 @@ echo "#############################################################"
 
 /opt/eduid/bin/pip install --pre -i ${PYPI} eduid-actions
 /opt/eduid/bin/pip install --pre -i ${PYPI} eduid_action.tou
+/opt/eduid/bin/pip install --pre -i ${PYPI} eduid_action.mfa
 /opt/eduid/bin/pip install       -i ${PYPI} raven
 /opt/eduid/bin/pip install       -i ${PYPI} gunicorn==19.3.0
 
