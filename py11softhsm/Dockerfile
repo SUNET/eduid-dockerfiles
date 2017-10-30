@@ -5,7 +5,6 @@ MAINTAINER eduid-dev <eduid-dev@SEGATE.SUNET.SE>
 ENV DEBIAN_FRONTEND noninteractive
 
 RUN apt-get update && \
-    apt-get -y dist-upgrade && \
     apt-get install -y \
       opensc \
       libz-dev \
