@@ -12,22 +12,22 @@ if [ -s /opt/eduid/etc/mongodb.conf ]; then
 fi
 
 
-if [ -x /opt/eduid/db-scripts/createUsers.sh ]; then
-    echo "$0: Starting mongodb for createUsers.sh"
+if [ -s /opt/eduid/db-scripts/db_setup.py -a -s /opt/eduid/db-scripts/local.yaml ]; then
+    echo "$0: Starting mongodb for db_setup.py"
     /sbin/start-stop-daemon --start -c mongodb:mongodb --background \
         --make-pidfile --pidfile $pidfile \
         --exec /usr/bin/mongod -- \
         --config $dbconfig \
         --dbpath /data --logpath /var/log/mongodb/mongodb.log
     sleep 2
-    echo "$0: Creating eduid users using /opt/eduid/db-scripts/createUsers.sh"
-    /opt/eduid/db-scripts/createUsers.sh
+    echo "$0: Creating eduid users using /opt/eduid/db-scripts/db_setup.py"
+    /opt/eduid/bin/python /opt/eduid/db-scripts/db_setup.py
     echo "$0: Stopping mongodb after createUsers.sh"
     /sbin/start-stop-daemon --stop -c mongodb:mongodb --pidfile $pidfile \
         --remove-pidfile
     sleep 2
 else
-    echo "$0: /opt/eduid/db-scripts/createUsers.sh not executable"
+    echo "$0: /opt/eduid/db-scripts/db_setup.py not executable or /opt/eduid/db-scripts/local.yaml does not exist"
 fi
 
 exec /sbin/start-stop-daemon --start -c mongodb:mongodb \
