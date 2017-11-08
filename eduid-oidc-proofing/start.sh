@@ -6,11 +6,12 @@ set -x
 . /opt/eduid/bin/activate
 
 # These could be set from Puppet if multiple instances are deployed
-eduid_name=${eduid_name-'oidc-proofing'}
+eduid_name=${eduid_name-'eduid-oidc-proofing'}
 app_name=${app_name-'oidc_proofing'}
-base_dir=${base_dir-"/opt/eduid"}
+base_dir=${base_dir-'/opt/eduid'}
 project_dir=${project_dir-"${base_dir}/eduid-webapp/src"}
 app_dir=${app_dir-"${project_dir}/${app_name}"}
+cfg_dir=${cfg_dir-"${base_dir}/etc"}
 # These *can* be set from Puppet, but are less expected to...
 config_ns=/eduid/webapp/${app_name}
 log_dir=${log_dir-'/var/log/eduid'}
@@ -24,6 +25,11 @@ chown -R eduid: "${log_dir}" "${state_dir}"
 
 # set PYTHONPATH if it is not already set using Docker environment
 export PYTHONPATH=${PYTHONPATH-${project_dir}}
+echo "PYTHONPATH=${PYTHONPATH}"
+
+# nice to have in docker run output, to check what
+# version of something is actually running.
+/opt/eduid/bin/pip freeze
 
 extra_args=""
 if [ -f "/opt/eduid/src/eduid-webapp/setup.py" ]; then
@@ -31,9 +37,8 @@ if [ -f "/opt/eduid/src/eduid-webapp/setup.py" ]; then
     extra_args="--reload"
 fi
 
-# nice to have in docker run output, to check what
-# version of something is actually running.
-/opt/eduid/bin/pip freeze
+echo ""
+echo "$0: Starting ${eduid_name}"
 
 export EDUID_CONFIG_NS=${EDUID_CONFIG_NS-${config_ns}}
 
