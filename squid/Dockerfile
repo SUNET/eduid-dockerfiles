@@ -1,14 +1,14 @@
-FROM ubuntu:14.04
+FROM debian
 
 RUN apt-get -q update && \
-    apt-get -qy install squid3
+    apt-get -y dist-upgrade && \
+    apt-get -qy install squid3 && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
 
-#ADD eduid_*_dstdomain.acl /etc/squid3/
-#ADD squid.conf /etc/squid3/squid.conf
-
-VOLUME ["/var/log/squid3", "/etc/squid3"]
+VOLUME ["/var/log/squid", "/etc/squid"]
 
 EXPOSE 3128
 EXPOSE 8080
 
-CMD [ "squid3", "-N" ]
+CMD [ "squid3", "-N", "-f", "/etc/squid/squid.conf" ]
