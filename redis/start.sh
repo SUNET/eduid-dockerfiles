@@ -28,7 +28,7 @@ if echo $extra_args | grep -qe "--sentinel"; then
 	echo "$0: IGNORING ${cfg_file} in favor of existing ${sentinel_cfg_file}"
     else
 	echo "$0: Initializing ${sentinel_cfg_file} from ${cfg_file}"
-	grep -e ^port -e ^sentinel "${cfg_file}" > "${sentinel_cfg_file}"
+	grep -e ^bind -e ^port -e ^sentinel "${cfg_file}" > "${sentinel_cfg_file}"
 	chown "${redisuser}:${redosgroup}" "${sentinel_cfg_file}"
 	chmod 600 "${sentinel_cfg_file}"
     fi
