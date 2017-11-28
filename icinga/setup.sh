@@ -18,9 +18,17 @@ apt-get -y install \
     sendemail \
     curl \
     rsync \
-    net-tools
+    net-tools \
+    libredis-perl
 
-#    libnagios-plugin-perl \
+
+# for troubleshooting in the container
+apt-get -y install \
+    vim \
+    netcat \
+    telnet \
+    traceroute
+
 
 apt-get clean
 rm -rf /var/lib/apt/lists/*
@@ -47,3 +55,6 @@ ln -s /usr/share/icinga/htdocs /www/icinga
 # preserve /etc/icinga/stylesheets, that start.sh will untar in /icinga_data/
 # in order for the files to eventually reach the nginx container. ugh.
 (cd /etc/icinga && tar zcf /stylesheets.tar.gz stylesheets)
+
+# Enable IPv6 in Redis.pm (from libredis-perl)
+sed -i -e 's/IO::Socket::INET/IO::Socket::IP/g' /usr/share/perl5/Redis.pm
