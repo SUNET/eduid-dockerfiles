@@ -8,4 +8,4 @@ logger -i -t haproxy-reload "Checking config: $*"
 
 logger -i -t haproxy-reload "Config checked OK, reloading PID `cat /run/haproxy.pid`"
 
-exec haproxy-systemd-wrapper -p /run/haproxy.pid -st /run/haproxy.pid
+exec haproxy-systemd-wrapper $* -p /run/haproxy.pid -st /run/haproxy.pid
