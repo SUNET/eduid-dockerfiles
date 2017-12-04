@@ -2,14 +2,10 @@
 
 set -e
 
-# check config
-exec /usr/sbin/haproxy -c $*
+logger -i -t haproxy-reload "Checking config: $*"
 
-if [ ! -f /run/haproxy.pid ]; then
-    echo "$0: Pid-file /run/haproxy.pid does not exist, can't send USR2 signal"
-    exit 1
-fi
+/usr/sbin/haproxy -c $*
 
-kill -USR2 $(cat /run/haproxy.pid)
+logger -i -t haproxy-reload "Config checked OK, reloading"
 
-echo "haproxy gracefully restarted"
+exec haproxy-systemd-wrapper -p <%= @haproxy_pidfile %> -st $(cat <%= @haproxy_pidfile %>)
