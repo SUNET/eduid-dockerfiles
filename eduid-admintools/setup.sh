@@ -14,4 +14,7 @@ echo "#############################################################"
 /opt/eduid/bin/pip install --pre -i ${PYPI} 'python-etcd==0.4.3'
 /opt/eduid/bin/pip install --pre -i ${PYPI} 'PyYAML==3.12'
 
+# Need to upgrade TLSv1 to TLSv1_2 to be able to connect to our etcd v3 nodes
+sed -i -e 's/ssl.PROTOCOL_TLSv1$/ssl.PROTOCOL_TLSv1_2/' /opt/eduid/local/lib/python2.7/site-packages/etcd/client.py
+
 /opt/eduid/bin/pip freeze
