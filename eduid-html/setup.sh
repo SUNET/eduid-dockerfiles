@@ -17,6 +17,8 @@ rm -f /etc/nginx/sites-enabled/*
 mkdir -p /opt/eduid/eduid-html/
 cd /opt/eduid/eduid-html/
 git clone https://github.com/SUNET/eduid-html.git wwwroot
+cd wwwroot
+git checkout old_dashboard_language_backport
 
 # save space
 rm -rf /var/lib/apt/lists/*
