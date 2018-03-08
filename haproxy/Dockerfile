@@ -13,6 +13,7 @@ WORKDIR /
 
 COPY cfgcheck.sh /cfgcheck.sh
 COPY reload.sh /reload.sh
+COPY autoreload.sh /autoreload.sh
 
 # This is the actual way that the image at https://hub.docker.com/_/haproxy/
 # runs haproxy, but it's hidden behind a entrypoint script that modifies the arguments.
