@@ -4,6 +4,17 @@ set -e
 
 HAPROXYCFG=${HAPROXYCFG-'/etc/haproxy/haproxy.cfg'}
 
+for i in $(seq 10); do
+    test -f "${HAPROXYCFG}" && break
+    sleep 1
+done
+
+if [ ! -f "${HAPROXYCFG}" ]; then
+    logger -i -t haproxy-autoreload "haproxy config not found after 10 seconds: ${HAPROXYCFG}"
+    exit 1
+fi
+
+
 logger -i -t haproxy-autoreload "Checking config: ${HAPROXYCFG}"
 
 /usr/sbin/haproxy -c "${HAPROXYCFG}"
