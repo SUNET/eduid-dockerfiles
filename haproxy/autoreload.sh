@@ -17,7 +17,7 @@ fi
 
 logger -i -t haproxy-autoreload "Checking config: ${HAPROXYCFG}"
 
-/usr/sbin/haproxy -c "${HAPROXYCFG}"
+/usr/sbin/haproxy -c -f "${HAPROXYCFG}"
 
 logger -i -t haproxy-autoreload "Config ${HAPROXYCFG} checked OK, starting haproxy-systemd-wrapper"
 /usr/sbin/haproxy-systemd-wrapper -p /run/haproxy.pid -f "${HAPROXYCFG}" &
@@ -28,10 +28,10 @@ while [ 1 ]; do
 
     logger -i -t haproxy-autoreload "Move-to event triggered, checking config: ${HAPROXYCFG}"
     config_ok=1
-    /usr/sbin/haproxy -c "${HAPROXYCFG}" || config_ok=0
+    /usr/sbin/haproxy -c -f "${HAPROXYCFG}" || config_ok=0
     if [ $config_ok = 1 ]; then
 	logger -i -t haproxy-autoreload "Config ${HAPROXYCFG} checked OK, gracefully restarting haproxy-systemd-wrapper"
-	haproxy-systemd-wrapper $* -p /run/haproxy.pid -sf `cat /run/haproxy.pid`
+	haproxy-systemd-wrapper $* -p /run/haproxy.pid -f "${HAPROXYCFG}" -sf `cat /run/haproxy.pid`
     else
 	logger -i -t haproxy-autoreload "Config ${HAPROXYCFG} NOT OK"
     fi
