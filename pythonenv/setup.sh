@@ -23,6 +23,7 @@ apt-get update && \
       procps \
       bind9-host \
       netcat-openbsd \
+      net-tools \
     && apt-get clean
 
 rm -rf /var/lib/apt/lists/*
