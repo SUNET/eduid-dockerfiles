@@ -4,11 +4,6 @@ set -e
 
 HAPROXYCFG=${HAPROXYCFG-'/etc/haproxy/haproxy.cfg'}
 
-# Enable haproxy to bind to addresses even if they haven't been added to
-# the namespace yet
-sysctl net.ipv4.ip_nonlocal_bind=1
-sysctl net.ipv6.ip_nonlocal_bind=1
-
 for i in $(seq 10); do
     test -f "${HAPROXYCFG}" && break
     sleep 1
