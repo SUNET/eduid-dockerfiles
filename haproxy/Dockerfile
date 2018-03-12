@@ -15,6 +15,8 @@ COPY cfgcheck.sh /cfgcheck.sh
 COPY reload.sh /reload.sh
 COPY autoreload.sh /autoreload.sh
 
+VOLUME [ "/var/run/haproxy" ]
+
 # This is the actual way that the image at https://hub.docker.com/_/haproxy/
 # runs haproxy, but it's hidden behind a entrypoint script that modifies the arguments.
 # The reason for running haproxy-systemd-wrapper is that it implements proper reloadability.
