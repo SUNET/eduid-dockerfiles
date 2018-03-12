@@ -1,7 +1,5 @@
 #!/bin/bash
 
-set -e
-
 HAPROXYCFG=${HAPROXYCFG-'/etc/haproxy/haproxy.cfg'}
 
 if [[ $WAIT_FOR_INTERFACE ]]; then
@@ -40,6 +38,8 @@ echo "$0: Config ${HAPROXYCFG} checked OK, starting haproxy-systemd-wrapper"
 /usr/sbin/haproxy-systemd-wrapper -p /run/haproxy.pid -f "${HAPROXYCFG}" &
 
 while [ 1 ]; do
+    echo "$0: Waiting for ${HAPROXYCFG} to be moved-to"
+
     # Block until an inotify event says that the config file was replaced
     inotifywait -e moved_to "${HAPROXYCFG}"
 
