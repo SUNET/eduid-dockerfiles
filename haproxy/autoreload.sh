@@ -48,8 +48,10 @@ while [ 1 ]; do
     /usr/sbin/haproxy -c -f "${HAPROXYCFG}" || config_ok=0
     if [ $config_ok = 1 ]; then
 	echo "$0: Config ${HAPROXYCFG} checked OK, gracefully restarting haproxy-systemd-wrapper"
-	haproxy-systemd-wrapper $* -p /run/haproxy.pid -f "${HAPROXYCFG}" -sf `cat /run/haproxy.pid`
+	/usr/sbin/haproxy $* -p /run/haproxy.pid -f "${HAPROXYCFG}" -sf `cat /run/haproxy.pid`
+	echo "$0: haproxy gracefully reloaded"
     else
 	echo "$0: Config ${HAPROXYCFG} NOT OK"
     fi
+    sleep 1  # spin control
 done
