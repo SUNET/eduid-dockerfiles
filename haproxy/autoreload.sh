@@ -11,7 +11,7 @@ if [[ $WAIT_FOR_INTERFACE ]]; then
 	sleep 1
     done
 
-    if [[ ! ip link ls dev "$WAIT_FOR_INTERFACE" ]]; then
+    if ! ip link ls dev "$WAIT_FOR_INTERFACE"; then
 	echo "$0: Interface ${WAIT_FOR_INTERFACE} not found after 10 seconds"
 	exit 1
     fi
