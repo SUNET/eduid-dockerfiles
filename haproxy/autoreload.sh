@@ -15,6 +15,9 @@ if [[ $WAIT_FOR_INTERFACE ]]; then
 	echo "$0: Interface ${WAIT_FOR_INTERFACE} not found after 10 seconds"
 	exit 1
     fi
+
+    echo "$0: Interface ${WAIT_FOR_INTERFACE} is UP:"
+    ip addr list "$WAIT_FOR_INTERFACE"
 fi
 
 for i in $(seq 10); do
