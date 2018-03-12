@@ -1,11 +1,25 @@
-#!/bin/sh
+#!/bin/bash
 
 set -e
 
 HAPROXYCFG=${HAPROXYCFG-'/etc/haproxy/haproxy.cfg'}
 
+if [[ $WAIT_FOR_INTERFACE ]]; then
+    for i in $(seq 10); do
+	ip link ls dev "$WAIT_FOR_INTERFACE" && break
+	echo "$0: Waiting for interface ${WAIT_FOR_INTERFACE} (${i}/10)"
+	sleep 1
+    done
+
+    if [[ ! ip link ls dev "$WAIT_FOR_INTERFACE" ]]; then
+	echo "$0: Interface ${WAIT_FOR_INTERFACE} not found after 10 seconds"
+	exit 1
+    fi
+fi
+
 for i in $(seq 10); do
     test -f "${HAPROXYCFG}" && break
+    echo "$0: Waiting for haproxy config file ${HAPROXYCFG} (${i}/10)"
     sleep 1
 done
 
