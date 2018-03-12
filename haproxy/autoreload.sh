@@ -6,12 +6,12 @@ HAPROXYCFG=${HAPROXYCFG-'/etc/haproxy/haproxy.cfg'}
 
 if [[ $WAIT_FOR_INTERFACE ]]; then
     for i in $(seq 10); do
-	ip link ls dev "$WAIT_FOR_INTERFACE" && break
+	ip link ls dev "$WAIT_FOR_INTERFACE" | grep -q 'state UP' && break
 	echo "$0: Waiting for interface ${WAIT_FOR_INTERFACE} (${i}/10)"
 	sleep 1
     done
 
-    if ! ip link ls dev "$WAIT_FOR_INTERFACE"; then
+    if ! ip link ls dev "$WAIT_FOR_INTERFACE" | grep -q 'state UP'; then
 	echo "$0: Interface ${WAIT_FOR_INTERFACE} not found after 10 seconds"
 	exit 1
     fi
