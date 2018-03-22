@@ -15,7 +15,7 @@ COPY cfgcheck.sh /cfgcheck.sh
 COPY reload.sh /reload.sh
 COPY autoreload.sh /autoreload.sh
 
-VOLUME [ "/var/run/haproxy" ]
+VOLUME [ "/var/run/haproxy", "/var/run/haproxy-control" ]
 
 # This is the actual way that the image at https://hub.docker.com/_/haproxy/
 # runs haproxy, but it's hidden behind a entrypoint script that modifies the arguments.
