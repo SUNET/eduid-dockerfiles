@@ -1,16 +1,18 @@
 #!/bin/bash
 
 HAPROXYCFG=${HAPROXYCFG-'/etc/haproxy/haproxy.cfg'}
+HAPROXYWAITIF=${HAPROXYWAITIF-'20'}
+HAPROXYWAITCFG=${HAPROXYWAITCFG-'10'}
 
 if [[ $WAIT_FOR_INTERFACE ]]; then
-    for i in $(seq 10); do
+    for i in $(seq ${HAPROXYWAITIF}); do
 	ip link ls dev "$WAIT_FOR_INTERFACE" | grep -q 'state UP' && break
-	echo "$0: Waiting for interface ${WAIT_FOR_INTERFACE} (${i}/10)"
+	echo "$0: Waiting for interface ${WAIT_FOR_INTERFACE} (${i}/${HAPROXYWAITIF})"
 	sleep 1
     done
 
     if ! ip link ls dev "$WAIT_FOR_INTERFACE" | grep -q 'state UP'; then
-	echo "$0: Interface ${WAIT_FOR_INTERFACE} not found after 10 seconds"
+	echo "$0: Interface ${WAIT_FOR_INTERFACE} not found after ${HAPROXYWAITIF} seconds"
 	exit 1
     fi
 
@@ -18,14 +20,14 @@ if [[ $WAIT_FOR_INTERFACE ]]; then
     ip addr list "$WAIT_FOR_INTERFACE"
 fi
 
-for i in $(seq 10); do
+for i in $(seq ${HAPROXYWAITCFG}); do
     test -f "${HAPROXYCFG}" && break
-    echo "$0: Waiting for haproxy config file ${HAPROXYCFG} (${i}/10)"
+    echo "$0: Waiting for haproxy config file ${HAPROXYCFG} (${i}/${HAPROXYWAITCFG})"
     sleep 1
 done
 
 if [ ! -f "${HAPROXYCFG}" ]; then
-    echo "$0: haproxy config not found after 10 seconds: ${HAPROXYCFG}"
+    echo "$0: haproxy config not found after ${HAPROXYWAITCFG} seconds: ${HAPROXYCFG}"
     exit 1
 fi
 
