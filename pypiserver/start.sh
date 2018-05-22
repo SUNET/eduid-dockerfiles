@@ -22,7 +22,8 @@ chown -R eduid: "${log_dir}"
 
 echo ""
 echo "$0: Starting ${run}"
-exec ${run} --fallback-url https://pypi.sunet.se/simple/ \
+exec start-stop-daemon --start -c eduid:eduid --exec ${run} -- \
+    --fallback-url https://pypi.sunet.se/simple/ \
     --log-file "${log_dir}/pypiserver.log" \
     -v -v \
     $packages_dir
