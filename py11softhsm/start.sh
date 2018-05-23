@@ -5,6 +5,7 @@ set -x
 
 . /opt/eduid/bin/activate
 
+eduid_name=${eduid_name-'py11softhsm'}
 log_dir=${log_dir-'/var/log/eduid'}
 var_dir=${var_dir-'/var/lib/softhsm'}
 logfile=${logfile-"${log_dir}/${eduid_name}.log"}
@@ -15,7 +16,7 @@ PYELEVEN_PORT=${PYELEVEN_PORT-'8000'}
 PKCS11PIN=${PKCS11PIN-'1234'}
 PKCS11SOPIN=${PKCS11SOPIN-'123456'}
 
-if [ ! -d "${var_dir}/tokens" ]; then
+if ! pkcs11-tool --module "${p11_module}" --login --pin "${PKCS11PIN}" --list-objects | grep -q "label:.*eduid"; then
     echo "$0: Initializing SoftHSM token"
     mkdir /var/lib/softhsm/tokens
     softhsm2-util --init-token --slot 0 --label "py11softhsm" --pin "${PKCS11PIN}" --so-pin "${PKCS11SOPIN}"
