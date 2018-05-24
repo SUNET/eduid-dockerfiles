@@ -13,8 +13,9 @@ cfg_dir=${cfg_dir-"${base_dir}/etc"}
 log_dir=${log_dir-'/var/log/eduid'}
 ini=${ini-"${cfg_dir}/${eduid_name}.ini"}
 run=${run-'/opt/eduid/bin/vccs_authbackend'}
+yhsm_device=${yhsm_device-'/dev/ttyACM0'}
 
-chown -R eduid: "${log_dir}"
+chown -R eduid: "${log_dir}" "${yhsm_device}"
 
 # || true to not fail on read-only cfg_dir
 chgrp eduid "${ini}" || true
