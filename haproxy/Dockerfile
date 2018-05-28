@@ -13,7 +13,6 @@ WORKDIR /
 
 COPY cfgcheck.sh /cfgcheck.sh
 COPY reload.sh /reload.sh
-COPY autoreload.sh /autoreload.sh
 
 VOLUME [ "/var/run/haproxy", "/var/run/haproxy-control" ]
 
