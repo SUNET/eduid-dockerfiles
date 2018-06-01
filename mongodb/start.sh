@@ -1,11 +1,11 @@
 #!/bin/bash
 
-dbconfig=/etc/mongodb.conf
+dbconfig=/etc/mongod.conf
 pidfile=/var/run/mongodb.pid
 
 chown -R mongodb:mongodb /data /var/log/mongodb
 
-if [ -s /opt/eduid/etc/mongodb.conf ]; then
+if [ -s /opt/eduid/etc/mongod.conf ]; then
    dbconfig=/opt/eduid/etc/mongodb.conf
 fi
 
@@ -33,4 +33,5 @@ exec /sbin/start-stop-daemon --start -c mongodb:mongodb \
     --make-pidfile --pidfile $pidfile \
     --exec /usr/bin/mongod -- \
     --config $dbconfig \
+    --bind_ip 0.0.0.0 \
     --dbpath /data --logpath /var/log/mongodb/mongodb.log
