@@ -17,7 +17,7 @@ PKCS11PIN=${PKCS11PIN-'1234'}
 PKCS11SOPIN=${PKCS11SOPIN-'123456'}
 PKCS11LABEL=${PKCS11LABEL-'py11softhsm'}
 
-if ! pkcs11-tool --module "${p11_module}" --login --pin "${PKCS11PIN}" --list-objects | grep -q "label:.*eduid"; then
+if ! pkcs11-tool --module "${p11_module}" --login --pin "${PKCS11PIN}" --list-objects | grep -q "label:.*${PKCS11LABEL}"; then
     echo "$0: Initializing SoftHSM token slot 0 with key from ${p11softhsm_init_rsa_key}"
     mkdir -p /var/lib/softhsm/tokens
     softhsm2-util --init-token --slot 0 --label "${PKCS11LABEL}" --pin "${PKCS11PIN}" --so-pin "${PKCS11SOPIN}"
