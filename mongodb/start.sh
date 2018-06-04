@@ -6,7 +6,7 @@ pidfile=/var/run/mongodb.pid
 chown -R mongodb:mongodb /data /var/log/mongodb
 
 if [ -s /opt/eduid/etc/mongod.conf ]; then
-   dbconfig=/opt/eduid/etc/mongodb.conf
+   dbconfig=/opt/eduid/etc/mongod.conf
 fi
 
 
