@@ -1,4 +1,4 @@
-FROM docker.sunet.se/eduid/eduid-webapp
+FROM docker.sunet.se/eduid/eduid-webapp:latest
 
 MAINTAINER eduid-dev <eduid-dev@SEGATE.SUNET.SE>
 
