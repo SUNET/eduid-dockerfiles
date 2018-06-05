@@ -6,7 +6,7 @@ set -x
 . /opt/eduid/bin/activate
 
 # These could be set from Puppet if multiple instances are deployed
-eduid_name=${eduid_name-'eduid-signup'}
+eduid_name=${eduid_name-'eduid-signup2'}
 app_name=${app_name-'signup'}
 base_dir=${base_dir-'/opt/eduid'}
 project_dir=${project_dir-"${base_dir}/eduid-webapp/src"}
