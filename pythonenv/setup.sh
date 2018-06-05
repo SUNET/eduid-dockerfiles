@@ -24,6 +24,7 @@ apt-get update && \
       bind9-host \
       netcat-openbsd \
       net-tools \
+      curl \
     && apt-get clean
 
 rm -rf /var/lib/apt/lists/*
