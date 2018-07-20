@@ -1,0 +1,164 @@
+
+clean_workspace: true
+triggers:
+  cron: "@weekly"
+slack:
+  room: eduid-builds
+
+extra_jobs:
+  - name: eduid-docker-pythonenv
+    builders:
+      - docker
+    docker_name: eduid/pythonenv
+    docker_context_dir: pythonenv
+    triggers:
+      cron: "@daily"
+
+  - name: eduid-admintools-docker
+    builders:
+      - docker
+    docker_name: eduid/eduid-admintools
+    docker_context_dir: eduid-admintools
+    upstream:
+      - eduid-docker-pythonenv
+      - eduid-userdb
+
+  - name: eduid-haproxy-docker
+    builders:
+      - docker
+    docker_name: library/haproxy
+    docker_context_dir: haproxy
+
+  - name: eduid-icinga-docker
+    builders:
+      - docker
+    docker_name: eduid/icinga
+    docker_context_dir: icinga
+
+  - name: eduid-mongodb-docker
+    builders:
+      - docker
+    docker_name: eduid/mongodb
+    docker_context_dir: mongodb
+
+  - name: eduid-munin-docker
+    builders:
+      - docker
+    docker_name: eduid/munin
+    docker_context_dir: munin
+
+  - name: eduid-nginx-docker
+    builders:
+      - docker
+    docker_name: eduid/nginx
+    docker_context_dir: nginx
+
+  - name: eduid-py11softhsm-docker
+    builders:
+      - docker
+    docker_name: eduid/py11softhsm
+    docker_context_dir: py11softhsm
+
+  - name: eduid-redis-docker
+    builders:
+      - docker
+    docker_name: eduid/redis
+    docker_context_dir: redis
+
+  - name: eduid-vccs-docker
+    builders:
+      - docker
+    docker_name: eduid/eduid-vccs
+    docker_context_dir: eduid-vccs
+    upstream:
+      - eduid-docker-pythonenv
+      - VCCS
+
+  - name: eduid-webapp-auth-docker
+    builders:
+      - docker
+    docker_name: eduid/eduid-authn
+    docker_context_dir: eduid-authn
+    upstream:
+      - eduid-webapp-docker
+
+  - name: eduid-webapp-email-docker
+    builders:
+      - docker
+    docker_name: eduid/eduid-email
+    docker_context_dir: eduid-email
+    upstream:
+      - eduid-webapp-docker
+
+  - name: eduid-webapp-jsconfig-docker
+    builders:
+      - docker
+    docker_name: eduid/eduid-jsconfig
+    docker_context_dir: eduid-jsconfig
+    upstream:
+      - eduid-webapp-docker
+
+  - name: eduid-webapp-letter-proofing-docker
+    builders:
+      - docker
+    docker_name: eduid/eduid-letter-proofing
+    docker_context_dir: eduid-letter-proofing
+    upstream:
+      - eduid-webapp-docker
+
+  - name: eduid-webapp-lookup-mobile-proofing-docker
+    builders:
+      - docker
+    docker_name: eduid/eduid-lookup-mobile-proofing
+    docker_context_dir: eduid-lookup-mobile-proofing
+    upstream:
+      - eduid-webapp-docker
+
+  - name: eduid-webapp-oidc-proofing-docker
+    builders:
+      - docker
+    docker_name: eduid/eduid-oidc-proofing
+    docker_context_dir: eduid-oidc-proofing
+    upstream:
+      - eduid-webapp-docker
+
+  - name: eduid-webapp-personal-data-docker
+    builders:
+      - docker
+    docker_name: eduid/eduid-personal-data-proofing
+    docker_context_dir: eduid-personal-data-proofing
+    upstream:
+      - eduid-webapp-docker
+
+  - name: eduid-webapp-phone-docker
+    builders:
+      - docker
+    docker_name: eduid/eduid-phone-proofing
+    docker_context_dir: eduid-phone-proofing
+    upstream:
+      - eduid-webapp-docker
+
+  - name: eduid-webapp-security-docker
+    builders:
+      - docker
+    docker_name: eduid/eduid-security
+    docker_context_dir: eduid-security
+    upstream:
+      - eduid-webapp-docker
+
+  - name: eduid-webapp-signup-docker
+    builders:
+      - docker
+    docker_name: eduid/eduid-signup2
+    docker_context_dir: eduid-signup2
+    upstream:
+      - eduid-webapp-docker
+
+  - name: eduid-webapp-support-docker
+    builders:
+      - docker
+    docker_name: eduid/eduid-support
+    docker_context_dir: eduid-support
+    upstream:
+      - eduid-webapp-docker
+
