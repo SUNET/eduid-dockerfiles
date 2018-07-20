@@ -74,6 +74,14 @@ extra_jobs:
       - eduid-docker-pythonenv
       - VCCS
 
+  - name: eduid-webapp-actions-docker
+    builders:
+      - docker
+    docker_name: eduid/eduid-actions2
+    docker_context_dir: eduid-actions2
+    upstream:
+      - eduid-webapp-docker
+
   - name: eduid-webapp-auth-docker
     builders:
       - docker
