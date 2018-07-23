@@ -170,8 +170,45 @@ extra_jobs:
     upstream:
       - eduid-webapp-docker
 
-  - name: docker-unbound
+  - name: eduid-unbound-docker
     builders:
       - docker
     docker_name: eduid/unbound
     docker_context_dir: unbound
+
+  - name: eduid-graphite-docker
+    builders:
+      - docker
+    docker_name: eduid/graphite
+    docker_context_dir: graphite
+
+  - name: eduid-squid-docker
+    builders:
+      - docker
+    docker_name: eduid/squid
+    docker_context_dir: squid
+
+  - name: eduid-statsd-docker
+    builders:
+      - docker
+    docker_name: eduid/statsd
+    docker_context_dir: statsd
+
+  - name: eduid-statsdtail-docker
+    builders:
+      - docker
+    docker_name: eduid/eduid-statsdtail
+    docker_context_dir: eduid-statsdtail
+
+  - name: eduid-rabbitmq-docker
+    builders:
+      - docker
+    docker_name: eduid/rabbitmq
+    docker_context_dir: rabbitmq
+
+  - name: eduid-rsyslog-docker
+    builders:
+      - docker
+    docker_name: eduid/rsyslog
+    docker_context_dir: rsyslog
+
