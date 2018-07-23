@@ -170,3 +170,8 @@ extra_jobs:
     upstream:
       - eduid-webapp-docker
 
+  - name: docker-unbound
+    builders:
+      - docker
+    docker_name: eduid/unbound
+    docker_context_dir: unbound
