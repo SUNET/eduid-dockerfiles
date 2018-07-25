@@ -1,6 +1,7 @@
 
 clean_workspace: true
 triggers:
+  github_push: false
   cron: "@weekly"
 slack:
   room: eduid-builds
@@ -32,6 +33,15 @@ extra_jobs:
     upstream:
       - eduid-docker-pythonenv
       - eduid-userdb
+
+  - name: eduid-api-docker
+    builders:
+      - docker
+    docker_name: eduid/eduid-api
+    docker_context_dir: eduid-api
+    upstream:
+      - eduid-docker-pythonenv
+      - eduid-api
 
   - name: eduid-haproxy-docker
     builders:
