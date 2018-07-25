@@ -14,6 +14,16 @@ extra_jobs:
     triggers:
       cron: "@daily"
 
+  - name: eduid-actions-docker
+    builders:
+      - docker
+    docker_name: eduid/eduid-actions
+    docker_context_dir: eduid-actions
+    upstream:
+      - eduid-docker-pythonenv
+      - eduid-actions
+      - eduid_action.tou
+
   - name: eduid-admintools-docker
     builders:
       - docker
