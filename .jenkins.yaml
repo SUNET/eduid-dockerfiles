@@ -13,6 +13,7 @@ extra_jobs:
     docker_name: eduid/pythonenv
     docker_context_dir: pythonenv
     triggers:
+      github_push: false
       cron: "@daily"
 
   - name: eduid-actions-docker
