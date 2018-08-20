@@ -18,7 +18,9 @@ echo "$0: Using PyPi URL ${PYPI}"
 echo "#############################################################"
 
 # redis-trib are cluster management scripts
-/opt/eduid/bin/pip install       -i ${PYPI} redis-trib
+# 0.5.2 has an installation issue, unpin when it is resolved
+# https://github.com/projecteru/redis-trib.py/issues/11
+/opt/eduid/bin/pip install       -i ${PYPI} "redis-trib==0.5.1"
 # for testing
 /opt/eduid/bin/pip install       -i ${PYPI} redis
 /opt/eduid/bin/pip install       -i ${PYPI} redis-py-cluster
