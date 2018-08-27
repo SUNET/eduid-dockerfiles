@@ -7,7 +7,7 @@ set -x
 
 # These could be set from Puppet if multiple instances are deployed
 eduid_name=${eduid_name-'eduid-actions2'}
-app_name=${app_name-'actions'}
+app_name=${app_name-'actions2'}
 base_dir=${base_dir-'/opt/eduid'}
 project_dir=${project_dir-"${base_dir}/eduid-webapp/src"}
 app_dir=${app_dir-"${project_dir}/${app_name}"}
