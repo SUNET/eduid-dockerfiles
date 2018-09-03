@@ -68,6 +68,8 @@ extra_jobs:
   - name: eduid-mongodb-docker
     builders:
       - docker
+    triggers:
+      cron: "@daily"
     docker_name: eduid/mongodb
     docker_context_dir: mongodb
 
