@@ -92,6 +92,8 @@ extra_jobs:
   - name: eduid-redis-docker
     builders:
       - docker
+    triggers:
+      cron: "@daily"
     docker_name: eduid/redis
     docker_context_dir: redis
 
