@@ -204,6 +204,14 @@ extra_jobs:
     upstream:
       - eduid-webapp-docker
 
+  - name: eduid-webapp-orcid-docker
+    builders:
+      - docker
+    docker_name: eduid/eduid-orcid
+    docker_context_dir: eduid-orcid
+    upstream:
+      - eduid-webapp-docker
+
   - name: eduid-unbound-docker
     builders:
       - docker
