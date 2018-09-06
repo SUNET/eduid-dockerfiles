@@ -14,5 +14,5 @@ export PIP_INDEX_URL=https://pypi.sunet.se/simple/
 # Pre-install common or slow Python packages
 pip install -U setuptools
 pip install nose nosexcover pylint mock==1.0.1
-pip install pysaml2==4.0.3rc1 "pymongo>=2.8,<3" redis>=2.10.5 PyNaCl>=1.0.1
+pip install pysaml2==4.6.1 "pymongo>=2.8,<3" redis>=2.10.5 PyNaCl>=1.0.1
 
