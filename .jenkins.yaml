@@ -204,6 +204,14 @@ extra_jobs:
     upstream:
       - eduid-webapp-docker
 
+  - name: eduid-webapp-eidas-docker
+    builders:
+      - docker
+    docker_name: eduid/eduid-eidas
+    docker_context_dir: eduid-eidas
+    upstream:
+      - eduid-webapp-docker
+
   - name: eduid-webapp-orcid-docker
     builders:
       - docker
