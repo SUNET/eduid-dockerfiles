@@ -17,6 +17,7 @@ test -d ${logdir} || (mkdir -p ${logdir}; chgrp ${redisgroup} ${logdir}; chmod 7
 for dir in ${logdir} ${datadir}; do
     test -d ${dir} && chgrp -R ${redisgroup} ${dir} && chmod 770 ${dir}
 done
+test -f /etc/redis/redis.conf && chgrp ${redisgroup} /etc/redis/redis.conf
 
 test -f /usr/bin/redis-sentinel || ln -s /usr/bin/redis-server /usr/bin/redis-sentinel
 
