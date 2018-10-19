@@ -15,7 +15,7 @@ extra_args=${extra_args-''}
 test -d ${logdir} || (mkdir -p ${logdir}; chgrp ${redisgroup} ${logdir}; chmod 770 ${logdir})
 
 for dir in ${logdir} ${datadir}; do
-    test -d ${dir} && chgrp ${redisgroup} ${dir} && chmod 770 ${dir}
+    test -d ${dir} && chgrp -R ${redisgroup} ${dir} && chmod 770 ${dir}
 done
 
 test -f /usr/bin/redis-sentinel || ln -s /usr/bin/redis-server /usr/bin/redis-sentinel
