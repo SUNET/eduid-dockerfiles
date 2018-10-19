@@ -20,6 +20,8 @@ for dir in "${htmldir}" "${cgitmpdir}"; do
     test -d "${dir}" && chown -R www-data "${dir}"
 done
 
+# make sure log files exists before chowning
+touch "${log_dir}"/{munin-cgi-graph.log,munin-cgi-html.log,munin-html.log}
 chown www-data: "${log_dir}"/*graph* || true
 chown www-data: "${log_dir}"/*html* || true
 
