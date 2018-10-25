@@ -268,3 +268,9 @@ extra_jobs:
     docker_name: eduid/pypiserver
     docker_context_dir: pypiserver
 
+  - name: eduid-turq-docker
+    builders:
+      - docker
+    docker_name: eduid/turq
+    docker_context_dir: turq
+
