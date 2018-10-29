@@ -6,8 +6,7 @@ set -x
 redisuser=${redisuser-'redis'}
 redisgroup=${redisgroup-'redis'}
 logdir=${logdir-'/var/log/redis'}
-rundir=${rundir-'/var/lib/redis'}
-datadir=${datadir-'/data'}
+datadir=${datadir-'/var/lib/redis'}
 run=${run-'/usr/bin/redis-server'}
 cfg_file=${cfg_file-'/etc/redis/redis.conf'}
 sentinel_cfg_file=${sentinel_cfg_file-"${datadir}/sentinel.conf"}
@@ -15,7 +14,7 @@ extra_args=${extra_args-''}
 
 test -d ${logdir} || (mkdir -p ${logdir}; chgrp ${redisgroup} ${logdir}; chmod 770 ${logdir})
 
-for dir in ${logdir} ${rundir} ${datadir}; do
+for dir in ${logdir} ${datadir}; do
     test -d ${dir} && chgrp -R ${redisgroup} ${dir} && chmod 770 ${dir}
 done
 test -f /etc/redis/redis.conf && chown "${redisuser}:${redisgroup}" /etc/redis/redis.conf
