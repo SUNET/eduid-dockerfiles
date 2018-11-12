@@ -269,7 +269,8 @@ extra_jobs:
     docker_context_dir: pypiserver
 
   - name: eduid-turq-docker
-    disabled: true  # Needs some love
+    # Needs some love
+    disabled: true
     builders:
       - docker
     docker_name: eduid/turq
