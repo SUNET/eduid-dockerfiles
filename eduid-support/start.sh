@@ -20,6 +20,8 @@ workers=${workers-1}
 worker_class=${worker_class-sync}
 worker_threads=${worker_threads-1}
 worker_timeout=${worker_timeout-30}
+# Need to tell Gunicorn to trust the X-Forwarded-* headers
+forwarded_allow_ips=${forwarded_allow_ips-'*'}
 
 chown -R eduid: "${log_dir}" "${state_dir}"
 
@@ -50,6 +52,7 @@ exec start-stop-daemon --start -c eduid:eduid --exec \
      --bind 0.0.0.0:8080 \
      --workers ${workers} --worker-class ${worker_class} \
      --threads ${worker_threads} --timeout ${worker_timeout} \
+     --forwarded-allow-ips="${forwarded_allow_ips}" \
      --access-logfile "${log_dir}/${eduid_name}-access.log" \
      --error-logfile "${log_dir}/${eduid_name}-error.log" \
      --capture-output \
