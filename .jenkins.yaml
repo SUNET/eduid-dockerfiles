@@ -16,6 +16,15 @@ extra_jobs:
       github_push: false
       cron: "@daily"
 
+  - name: eduid-docker-python3env
+    builders:
+      - docker
+    docker_name: eduid/python3env
+    docker_context_dir: python3env
+    triggers:
+      github_push: false
+      cron: "@daily"
+
   - name: eduid-actions-docker
     builders:
       - docker
