@@ -31,7 +31,7 @@ rm -rf /var/lib/apt/lists/*
 
 virtualenv -p python3 /opt/eduid
 /opt/eduid/bin/pip install -U pip
-/opt/eduid/bin/pip install -r /opt/eduid/base_requirements.txt
+/opt/eduid/bin/pip install --no-cache-dir -r /opt/eduid/base_requirements.txt
 /opt/eduid/bin/pip freeze
 
 addgroup --system eduid
