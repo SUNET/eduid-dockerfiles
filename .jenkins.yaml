@@ -43,15 +43,6 @@ extra_jobs:
       - eduid-docker-pythonenv
       - eduid-api
 
-  - name: eduid-msg-docker
-    builders:
-      - docker
-    docker_name: eduid/eduid-msg
-    docker_context_dir: eduid-msg
-    upstream:
-      - eduid-docker-pythonenv
-      - eduid_msg
-
   - name: eduid-haproxy-docker
     builders:
       - docker
