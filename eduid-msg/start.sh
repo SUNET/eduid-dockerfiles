@@ -28,7 +28,7 @@ celery_args="--loglevel INFO"
 if [ -f /opt/eduid/src/${eduid_name}/setup.py -o \
      -f /opt/eduid/src/${app_name}/setup.py ]; then
     # eduid-dev environment
-    celery_args="--loglevel DEBUG --autoreload"
+    celery_args="--loglevel DEBUG"
 else
     if [ -f "${cfg_dir}/${app_name}_DEBUG" ]; then
 	# eduid-dev environment
