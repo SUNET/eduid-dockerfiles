@@ -13,12 +13,13 @@ apt-get update && \
       git \
       build-essential \
       libpython3-dev \
+      python3-cffi \
+      python3-virtualenv \
       libssl-dev \
       libxml2-dev \
       libxslt1-dev \
       xmlsec1 \
       libxml2-utils \
-      python-virtualenv \
       iputils-ping \
       procps \
       bind9-host \
