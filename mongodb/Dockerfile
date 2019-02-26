@@ -1,5 +1,6 @@
 # pythonenv used to get environment for db-scripts
-FROM docker.sunet.se/eduid/pythonenv
+# (NOTE: this container is only used in tests and in eduid-developer)
+FROM docker.sunet.se/eduid/python3env
 
 MAINTAINER eduid-dev <eduid-dev@SEGATE.SUNET.SE>
 
