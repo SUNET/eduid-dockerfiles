@@ -1,5 +1,6 @@
 -i https://pypi.sunet.se
 pynacl>=1.0.1
-pysaml2>=4.6.1
-pymongo>=3.6.0,==3.6.*
+pysaml2>=4.6.5,4.6.*
+pymongo>=3.6.0,==3.*
 lxml==3.7.2
+mypy>==0.660
