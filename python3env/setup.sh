@@ -14,6 +14,7 @@ apt-get update && \
       build-essential \
       libpython3-dev \
       python3-cffi \
+      python3-venv \
       libssl-dev \
       libxml2-dev \
       libxslt1-dev \
