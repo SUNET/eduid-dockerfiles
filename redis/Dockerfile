@@ -1,4 +1,4 @@
-FROM docker.sunet.se/eduid/pythonenv
+FROM debian:stable
 ADD setup.sh /setup.sh
 RUN /setup.sh
 EXPOSE 6379
