@@ -14,7 +14,6 @@ apt-get update && \
       build-essential \
       libpython3-dev \
       python3-cffi \
-      python3-virtualenv \
       libssl-dev \
       libxml2-dev \
       libxslt1-dev \
@@ -30,7 +29,7 @@ apt-get update && \
 
 rm -rf /var/lib/apt/lists/*
 
-virtualenv -p python3 /opt/eduid
+python3 -m venv /opt/eduid
 /opt/eduid/bin/pip install -U pip
 /opt/eduid/bin/pip install --no-cache-dir -r /opt/eduid/base_requirements.txt
 /opt/eduid/bin/pip freeze
