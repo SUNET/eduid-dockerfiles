@@ -105,6 +105,7 @@ extra_jobs:
     docker_context_dir: eduid-actions2
     upstream:
       - eduid-webapp-docker
+      - eduid-action
 
   - name: eduid-webapp-auth-docker
     builders:
