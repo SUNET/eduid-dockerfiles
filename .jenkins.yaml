@@ -266,3 +266,9 @@ extra_jobs:
     docker_name: eduid/turq
     docker_context_dir: turq
 
+  - name: sunet-frontendtools
+    builders:
+      - docker
+    docker_name: frontend/frontend-tools
+    docker_context_dir: frontend-tools
+
