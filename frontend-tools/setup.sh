@@ -24,4 +24,6 @@ python3.7 -m venv /opt/frontend
 /opt/frontend/bin/pip3 install PyYAML
 
 git clone https://github.com/SUNET/sarimner-frontend /opt/sarimner
+# preserve info about what was cloned in the build logs
+(cd /opt/sarimner; git show --oneline -s --show-signature)
 cp -a /opt/sarimner/scripts /opt/frontend/scripts
