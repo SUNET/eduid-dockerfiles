@@ -1,0 +1,27 @@
+#!/bin/bash
+
+set -e
+set -x
+
+apt-get update
+apt-get -y --no-install-recommends install \
+	python3-jinja2 \
+	python3-yaml \
+	python3-requests \
+	python3.7-venv \
+	python3-pip \
+	inotify-tools \
+	procps \
+	net-tools \
+	socat \
+	curl \
+	git
+apt-get clean
+rm -rf /var/lib/apt/lists/*
+
+python3.7 -m venv /opt/frontend
+/opt/frontend/bin/pip3 install git+git://github.com/SUNET/haproxy-status#egg=haproxy-status
+/opt/frontend/bin/pip3 install PyYAML
+
+git clone https://github.com/SUNET/sarimner-frontend /opt/sarimner
+cp -a /opt/sarimner/scripts /opt/frontend/scripts
