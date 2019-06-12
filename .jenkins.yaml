@@ -272,10 +272,21 @@ extra_jobs:
     docker_name: frontend/frontend-tools
     docker_context_dir: frontend-tools
 
-
   - name: telegraf
     builders:
       - docker
     docker_name: eduid/telegraf
     docker_context_dir: telegraf
+
+  - name: graphite
+    builders:
+      - docker
+    docker_name: eduid/graphite
+    docker_context_dir: graphite
+
+  - name: influxdb
+    builders:
+      - docker
+    docker_name: eduid/influxdb
+    docker_context_dir: influxdb
 
