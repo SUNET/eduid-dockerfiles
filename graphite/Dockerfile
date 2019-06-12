@@ -1,6 +1,6 @@
-FROM        debian:stable
+FROM        debian:testing
 ENV         DEBIAN_FRONTEND noninteractive
-RUN         apt-get update && apt-get install -y graphite-carbon graphite-api supervisor gunicorn3 python-rrdtool
+RUN         apt-get update && apt-get install -y graphite-carbon graphite-web supervisor gunicorn3 python-rrdtool
 # for import from Munin
 RUN	    apt-get install -y rename
 # XXX maybe storage-schemas should not be part of the image?
