@@ -5,6 +5,4 @@ RUN /setup.sh
 ENV PATH=/opt/frontend/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 ENV PYTHONPATH=/opt/frontend
 
-VOLUME ["/opt/frontend/scripts"]
-
 ENTRYPOINT ["bash"]
