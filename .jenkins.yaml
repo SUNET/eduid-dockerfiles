@@ -271,6 +271,8 @@ extra_jobs:
       - docker
     docker_name: frontend/frontend-tools
     docker_context_dir: frontend-tools
+    upstream:
+      - haproxy-status
 
   - name: telegraf
     builders:

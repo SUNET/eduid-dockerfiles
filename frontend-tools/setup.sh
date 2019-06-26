@@ -3,6 +3,8 @@
 set -e
 set -x
 
+PYPI="https://pypi.sunet.se/simple/"
+
 apt-get update
 apt-get -y --no-install-recommends install \
 	python3-jinja2 \
@@ -20,8 +22,8 @@ apt-get clean
 rm -rf /var/lib/apt/lists/*
 
 python3.7 -m venv /opt/frontend
-/opt/frontend/bin/pip3 install git+git://github.com/SUNET/haproxy-status#egg=haproxy-status
-/opt/frontend/bin/pip3 install PyYAML
+/opt/frontend/bin/pip3 install -i ${PYPI} haproxy-status
+/opt/frontend/bin/pip3 install -i ${PYPI} PyYAML
 
 git clone https://github.com/SUNET/sarimner-frontend /opt/sarimner
 # preserve info about what was cloned in the build logs
