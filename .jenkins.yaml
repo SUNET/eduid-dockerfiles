@@ -268,3 +268,29 @@ extra_jobs:
     docker_name: eduid/turq
     docker_context_dir: turq
 
+  - name: sunet-frontendtools
+    builders:
+      - docker
+    docker_name: frontend/frontend-tools
+    docker_context_dir: frontend-tools
+    upstream:
+      - haproxy-status
+
+  - name: telegraf
+    builders:
+      - docker
+    docker_name: eduid/telegraf
+    docker_context_dir: telegraf
+
+  - name: graphite
+    builders:
+      - docker
+    docker_name: eduid/graphite
+    docker_context_dir: graphite
+
+  - name: influxdb
+    builders:
+      - docker
+    docker_name: eduid/influxdb
+    docker_context_dir: influxdb
+
