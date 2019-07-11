@@ -18,5 +18,6 @@ VOLUME [ "/var/run/haproxy", "/var/run/haproxy-control" ]
 
 # This is the actual way that the image at https://hub.docker.com/_/haproxy/
 # runs haproxy, but it's hidden behind a entrypoint script that modifies the arguments.
-# The reason for running haproxy-systemd-wrapper is that it implements proper reloadability.
-CMD ["/usr/sbin/haproxy-systemd-wrapper", "-p", "/run/haproxy.pid", "-f", "/etc/haproxy/haproxy.cfg"]
+# -W  -- "master-worker mode" (similar to the old "haproxy-systemd-wrapper"; allows for reload via "SIGUSR2")
+# -db -- disables background mode
+CMD ["/usr/sbin/haproxy", "-p", "/run/haproxy.pid", "-f", "/etc/haproxy/haproxy.cfg", "-W", "-db"]
