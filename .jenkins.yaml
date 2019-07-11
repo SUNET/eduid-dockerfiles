@@ -225,6 +225,8 @@ extra_jobs:
   - name: eduid-squid-docker
     builders:
       - docker
+    triggers:
+      cron: "@monthly"
     docker_name: eduid/squid
     docker_context_dir: squid
 
