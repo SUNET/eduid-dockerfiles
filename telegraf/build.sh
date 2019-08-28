@@ -20,9 +20,12 @@ echo "TELEGRAF_VERSION: ${_telegraf_version}"
 echo "DOCKER TAG: ${_telegraf_tag}"
 echo "RELEASE BUILD: ${_release_build}"
 
-test -s telegraf_${TELEGRAF_VERSION}_amd64.deb || curl https://dl.influxdata.com/telegraf/releases/telegraf_${TELEGRAF_VERSION}_amd64.deb > telegraf_${TELEGRAF_VERSION}_amd64.deb
+if [ ! -s telegraf_"${TELEGRAF_VERSION}"_amd64.deb ]; then
+    test -x /usr/bin/curl || apt-get -y --no-recommends install curl
+    curl https://dl.influxdata.com/telegraf/releases/telegraf_"${TELEGRAF_VERSION}"_amd64.deb > telegraf_"${TELEGRAF_VERSION}"_amd64.deb
+fi
 
 docker pull debian:testing
 docker pull gcr.io/distroless/base
-docker build --build-arg TELEGRAF_VERSION=${_telegraf_version} --tag "${_telegraf_image}:latest"  --no-cache=true .
+docker build --build-arg TELEGRAF_VERSION="${_telegraf_version}" --tag "${_telegraf_image}:latest"  --no-cache=true .
 docker tag "${_telegraf_image}:latest" "${_telegraf_image}:${_telegraf_tag}"
