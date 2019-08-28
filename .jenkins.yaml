@@ -280,7 +280,10 @@ extra_jobs:
     builders:
       - script
     script:
-      - build.sh
+      - "pwd"
+      - "ls -l"
+      - "cd telegraf"
+      - "./build.sh"
     docker_name: eduid/telegraf
     docker_context_dir: telegraf
 
