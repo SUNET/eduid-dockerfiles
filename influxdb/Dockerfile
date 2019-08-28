@@ -2,7 +2,7 @@
 FROM        debian:stable AS build
 ENV         DEBIAN_FRONTEND noninteractive
 RUN         apt-get update && apt-get install --no-install-recommends -y gnupg2
-RUN         apt-get install -y apt-transport-https
+RUN         apt-get install -y apt-transport-https ca-certificates
 COPY        influxdb.key /tmp
 COPY        influxdb.list /etc/apt/sources.list.d/influxdb.list
 RUN         apt-key add /tmp/influxdb.key
