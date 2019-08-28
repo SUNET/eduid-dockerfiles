@@ -21,7 +21,7 @@ echo "DOCKER TAG: ${_telegraf_tag}"
 echo "RELEASE BUILD: ${_release_build}"
 
 if [ ! -s telegraf_"${TELEGRAF_VERSION}"_amd64.deb ]; then
-    test -x /usr/bin/curl || apt-get -y --no-recommends install curl
+    test -x /usr/bin/curl || apt-get -y install --no-recommends curl
     curl https://dl.influxdata.com/telegraf/releases/telegraf_"${TELEGRAF_VERSION}"_amd64.deb > telegraf_"${TELEGRAF_VERSION}"_amd64.deb
 fi
 
