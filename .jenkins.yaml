@@ -277,8 +277,8 @@ extra_jobs:
       - haproxy-status
 
   - name: telegraf
-    builders:
-      - docker
+    script:
+      - build.sh
     docker_name: eduid/telegraf
     docker_context_dir: telegraf
 
