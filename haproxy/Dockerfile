@@ -2,7 +2,8 @@
 # Generic haproxy image for use in different places in eduID.
 #
 
-FROM debian:stable
+# use debian:testing to get haproxy 2.0
+FROM debian:testing
 
 MAINTAINER eduid-dev <eduid-dev@SEGATE.SUNET.SE>
 
