@@ -6,7 +6,7 @@ logger -i -t haproxy-reload "Checking config: $*"
 
 /usr/sbin/haproxy -c $*
 
-logger -i -t haproxy-reload "Config checked OK, reloading haproxy-systemd-wrapper"
+logger -i -t haproxy-reload "Config checked OK, reloading haproxy"
 
 # There is good discussion about how to restart haproxy without loosing requests at
 #
@@ -19,5 +19,4 @@ logger -i -t haproxy-reload "Config checked OK, reloading haproxy-systemd-wrappe
 # NOTE: This variant doesn't work because Docker sees the original PID terminating
 #exec haproxy-systemd-wrapper $* -p /run/haproxy.pid -sf `cat /run/haproxy.pid`
 
-# PID 1 is the haproxy-systemd-wrapper, it will re-exec itself on SIGUSR2
-kill -USR2 1
+kill -USR2 $(cat /run/haproxy.pid)
