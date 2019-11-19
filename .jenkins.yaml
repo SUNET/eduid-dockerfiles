@@ -46,7 +46,7 @@ extra_jobs:
   - name: eduid-haproxy-docker
     builders:
       - docker
-    docker_name: library/haproxy
+    docker_name: eduid/haproxy
     docker_context_dir: haproxy
 
   - name: eduid-icinga-docker
