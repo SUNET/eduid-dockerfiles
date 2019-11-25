@@ -210,6 +210,14 @@ extra_jobs:
     upstream:
       - eduid-webapp-docker
 
+  - name: eduid-webapp-reset-password-docker
+    builders:
+      - docker
+    docker_name: eduid/eduid-reset-password
+    docker_context_dir: eduid-reset-password
+    upstream:
+      - eduid-webapp-docker
+
   - name: eduid-unbound-docker
     builders:
       - docker
