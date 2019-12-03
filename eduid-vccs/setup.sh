@@ -4,8 +4,9 @@ set -e
 
 apt-get update
 apt-get -y install \
-    libnettle6 \
-    yhsm-tools
+	curl \
+	libnettle6 \
+	yhsm-tools
 apt-get clean
 rm -rf /var/lib/apt/lists/*
 
