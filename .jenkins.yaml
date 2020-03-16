@@ -307,3 +307,15 @@ extra_jobs:
     docker_name: eduid/influxdb
     docker_context_dir: influxdb
 
+  - name: eduid-satosa-docker
+    builders:
+      - script
+    script:
+      - "pwd"
+      - "ls -l"
+      - "cd satosa"
+      - "ls -l"
+      - "./build.sh"
+    docker_name: eduid/satosa
+    docker_context_dir: satosa
+
