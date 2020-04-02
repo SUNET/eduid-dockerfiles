@@ -210,6 +210,14 @@ extra_jobs:
     upstream:
       - eduid-webapp-docker
 
+  - name: eduid-webapp-reset-password-docker
+    builders:
+      - docker
+    docker_name: eduid/eduid-reset-password
+    docker_context_dir: eduid-reset-password
+    upstream:
+      - eduid-webapp-docker
+
   - name: eduid-unbound-docker
     builders:
       - docker
@@ -298,4 +306,16 @@ extra_jobs:
       - docker
     docker_name: eduid/influxdb
     docker_context_dir: influxdb
+
+  - name: eduid-satosa-docker
+    builders:
+      - script
+    script:
+      - "pwd"
+      - "ls -l"
+      - "cd satosa"
+      - "ls -l"
+      - "./build.sh"
+    docker_name: eduid/satosa
+    docker_context_dir: satosa
 
