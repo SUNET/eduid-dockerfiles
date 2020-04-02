@@ -319,3 +319,8 @@ extra_jobs:
     docker_name: eduid/satosa
     docker_context_dir: satosa
 
+  - name: eduid-satosa-scim-docker
+    builders:
+      - docker
+    docker_name: eduid/satosa-scim
+    docker_context_dir: satosa-scim
