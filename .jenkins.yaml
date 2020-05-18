@@ -218,6 +218,14 @@ extra_jobs:
     upstream:
       - eduid-webapp-docker
 
+  - name: eduid-webapp-group-management-docker
+    builders:
+      - docker
+    docker_name: eduid/eduid-group-management
+    docker_context_dir: eduid-group-management
+    upstream:
+      - eduid-webapp-docker
+
   - name: eduid-unbound-docker
     builders:
       - docker
