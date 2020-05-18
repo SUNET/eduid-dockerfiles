@@ -20,7 +20,7 @@ RUN rm -rf /var/lib/apt/lists/*
 COPY hgrc /root/.hgrc
 # End workaround
 RUN /opt/eduid/bin/pip install --upgrade hg+https://bitbucket.org/PyKCS11/pykcs11#egg=pykcs11
-RUN /opt/eduid/bin/pip install --upgrade git+git://github.com/leifj/pyeleven.git#egg=pyeleven
+RUN /opt/eduid/bin/pip install --upgrade git+git://github.com/IdentityPython/pyeleven.git#egg=pyeleven
 RUN /opt/eduid/bin/pip install gunicorn flask
 
 WORKDIR /
