@@ -2,7 +2,7 @@ FROM docker.sunet.se/eduid/eduid-webapp
 
 MAINTAINER eduid-dev <eduid-dev@SEGATE.SUNET.SE>
 
-VOLUME ["/opt/eduid/etc/eduid-webapp", "/opt/eduid/run", "/opt/eduid/src", "/var/log"]
+VOLUME ["/opt/eduid/etc", "/opt/eduid/run", "/opt/eduid/src", "/var/log"]
 
 WORKDIR /opt/eduid
 
