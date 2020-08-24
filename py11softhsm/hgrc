@@ -1,2 +1,0 @@
-[hostsecurity]
-api.media.atlassian.com:ciphers = DEFAULT@SECLEVEL=1
