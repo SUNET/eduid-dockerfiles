@@ -226,6 +226,14 @@ extra_jobs:
     upstream:
       - eduid-webapp-docker
 
+  - name: eduid-webapp-idp2
+    builders:
+      - docker
+    docker_name: eduid/eduid-idp2
+    docker_context_dir: eduid-idp2
+    upstream:
+      - eduid-webapp-docker
+
   - name: eduid-unbound-docker
     builders:
       - docker
