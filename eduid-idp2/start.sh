@@ -7,7 +7,7 @@ set -x
 
 # These could be set from Puppet if multiple instances are deployed
 eduid_name=${eduid_name-'eduid-idp2'}
-app_name=${app_name-'idp2'}
+app_name=${app_name-'idp'}
 base_dir=${base_dir-'/opt/eduid'}
 project_dir=${project_dir-"${base_dir}/eduid-webapp/src"}
 app_dir=${app_dir-"${project_dir}/${app_name}"}
@@ -55,5 +55,6 @@ exec start-stop-daemon --start -c eduid:eduid --exec \
      --forwarded-allow-ips="${forwarded_allow_ips}" \
      --access-logfile "${log_dir}/${eduid_name}-access.log" \
      --error-logfile "${log_dir}/${eduid_name}-error.log" \
+     --log-level debug \
      --capture-output \
      ${extra_args} eduid_webapp.idp.run:app
