@@ -2,8 +2,10 @@
 
 set -ex
 
-_telegraf_version=$1
-_telegraf_tag=$2
+# Remember to set TELEGRAF_VERSION and TELEGRAF_TAG för telegraf job in .jenkings.yaml if running on ci.sunet.se
+_jenkins_job=${JENKINS_JOB}
+_telegraf_version=${TELEGRAF_VERSION-$1}
+_telegraf_tag=${TELEGRAF_TAG-$2}
 _telegraf_image='local/telegraf'
 _release_build=false
 
@@ -27,5 +29,7 @@ fi
 
 docker pull debian:testing
 docker pull gcr.io/distroless/base
-docker build --build-arg TELEGRAF_VERSION="${_telegraf_version}" --tag "${_telegraf_image}:latest"  --no-cache=true .
-docker tag "${_telegraf_image}:latest" "${_telegraf_image}:${_telegraf_tag}"
+if [ -z "${_jenkins_job}" ]; then
+  docker build --build-arg TELEGRAF_VERSION="${_telegraf_version}" --tag "${_telegraf_image}:latest"  --no-cache=true .
+  docker tag "${_telegraf_image}:latest" "${_telegraf_image}:${_telegraf_tag}"
+fi

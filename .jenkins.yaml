@@ -301,14 +301,21 @@ extra_jobs:
       - haproxy-status
 
   - name: telegraf
+    environment_variables:
+      JENKINS_JOB: "yes"
+      TELEGRAF_VERSION: "1.16.1-1"
+      TELEGRAF_TAG: "1.16.1"
     builders:
       - script
+      - docker
     script:
       - "pwd"
       - "ls -l"
       - "cd telegraf"
       - "./build.sh"
     docker_name: eduid/telegraf
+    docker_tags:
+      - "${TELEGRAF_TAG}"
     docker_context_dir: telegraf
 
   - name: graphite
