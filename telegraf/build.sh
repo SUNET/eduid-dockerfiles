@@ -29,4 +29,5 @@ docker pull debian:testing
 docker pull gcr.io/distroless/base
 docker build --build-arg TELEGRAF_VERSION="${_telegraf_version}" --tag "${_telegraf_image}:latest"  --no-cache=true .
 docker tag "${_telegraf_image}:latest" "${_telegraf_image}:${_telegraf_tag}"
-docker push ${_telegraf_image}
+docker push "${_telegraf_image}:latest"
+docker push "${_telegraf_image}:${_telegraf_tag}"
