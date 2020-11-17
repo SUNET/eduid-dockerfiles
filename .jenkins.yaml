@@ -1,7 +1,7 @@
 
 clean_workspace: true
 triggers:
-  github_push: true
+  github_push: false
   cron: "@weekly"
 slack:
   room: eduid-builds
