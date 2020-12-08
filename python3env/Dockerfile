@@ -1,4 +1,4 @@
-FROM debian:testing
+FROM debian:stable
 
 MAINTAINER eduid-dev <eduid-dev@SEGATE.SUNET.SE>
 
