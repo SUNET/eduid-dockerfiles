@@ -7,15 +7,6 @@ slack:
   room: eduid-builds
 
 extra_jobs:
-  - name: eduid-docker-pythonenv
-    builders:
-      - docker
-    docker_name: eduid/pythonenv
-    docker_context_dir: pythonenv
-    triggers:
-      github_push: false
-      cron: "@daily"
-
   - name: eduid-docker-python3env
     builders:
       - docker
@@ -31,7 +22,7 @@ extra_jobs:
     docker_name: eduid/eduid-admintools
     docker_context_dir: eduid-admintools
     upstream:
-      - eduid-docker-pythonenv
+      - eduid-docker-python3env
       - eduid-userdb
 
   - name: eduid-api-docker
@@ -40,7 +31,6 @@ extra_jobs:
     docker_name: eduid/eduid-api
     docker_context_dir: eduid-api
     upstream:
-      - eduid-docker-pythonenv
       - eduid-api
 
   - name: eduid-haproxy-docker
@@ -95,7 +85,6 @@ extra_jobs:
     docker_name: eduid/eduid-vccs
     docker_context_dir: eduid-vccs
     upstream:
-      - eduid-docker-pythonenv
       - VCCS
 
   - name: eduid-webapp-actions-docker
