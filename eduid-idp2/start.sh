@@ -16,6 +16,7 @@ cfg_dir=${cfg_dir-"${base_dir}/etc"}
 config_ns=/eduid/webapp/${app_name}
 log_dir=${log_dir-'/var/log/eduid'}
 state_dir=${state_dir-"${base_dir}/run"}
+metadata=${metadata-"${state_dir}/metadata.xml"}
 workers=${workers-1}
 worker_class=${worker_class-sync}
 worker_threads=${worker_threads-1}
@@ -41,6 +42,13 @@ fi
 
 echo ""
 echo "$0: Starting ${eduid_name}"
+
+if [ ! -s "${metadata}" ]; then
+    # Create file with local metadata
+    cd "${cfg_dir}" && \
+	/opt/eduid/bin/make_metadata.py "${pysaml2_settings}" | \
+	xmllint --format - > "${metadata}"
+fi
 
 export EDUID_CONFIG_NS=${EDUID_CONFIG_NS-${config_ns}}
 
