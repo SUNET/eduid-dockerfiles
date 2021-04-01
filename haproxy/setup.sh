@@ -8,6 +8,7 @@ apt-get -y install \
 	curl \
 	haproxy \
 	inotify-tools \
+	iproute2 \
 	net-tools \
 	netcat-openbsd \
 	procps
