@@ -42,6 +42,7 @@ echo "#############################################################"
 
 /opt/eduid/bin/pip install -i ${PYPI} jose
 /opt/eduid/bin/pip install -i ${PYPI} requests
+/opt/eduid/bin/pip install -i ${PYPI} PyYAML
 
 /opt/eduid/bin/pip freeze
 
