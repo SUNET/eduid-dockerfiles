@@ -10,7 +10,7 @@ apt-get -y --no-install-recommends install \
 	python3-jinja2 \
 	python3-yaml \
 	python3-requests \
-	python3.7-venv \
+	python3-venv \
 	python3-pip \
 	inotify-tools \
 	procps \
