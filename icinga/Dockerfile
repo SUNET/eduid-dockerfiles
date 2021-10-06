@@ -1,4 +1,4 @@
-FROM docker.sunet.se/eduid/pythonenv
+FROM docker.sunet.se/eduid/python3env
 
 MAINTAINER eduid-dev <eduid-dev@SEGATE.SUNET.SE>
 
@@ -12,8 +12,8 @@ RUN /opt/eduid/setup.sh
 ADD start.sh /start.sh
 
 ADD supervisord.conf /etc/supervisor/conf.d/supervisord.conf
-ADD www.conf /etc/php/7.0/fpm/pool.d/www.conf
-ADD php-fpm.conf /etc/php/7.0/fpm/php-fpm.conf
+ADD www.conf /etc/php/7.3/fpm/pool.d/www.conf
+ADD php-fpm.conf /etc/php/7.3/fpm/php-fpm.conf
 # Add SUNET infra cert
 ADD infra.crt /usr/local/share/ca-certificates/
 RUN /usr/sbin/update-ca-certificates

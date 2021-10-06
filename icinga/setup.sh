@@ -5,21 +5,21 @@ set -x
 
 apt-get update
 apt-get -y install \
-    php-fpm \
+    curl \
     fcgiwrap \
-    supervisor \
     icinga \
     libjson-perl \
-    liburi-perl \
     libmonitoring-plugin-perl \
+    libredis-perl \
+    liburi-perl \
     nagios-nrpe-plugin \
     nagios-plugins-contrib \
-    nsca-client \
-    sendemail \
-    curl \
-    rsync \
     net-tools \
-    libredis-perl
+    nsca-client \
+    php-fpm \
+    rsync \
+    sendemail \
+    supervisor
 
 
 # for troubleshooting in the container
@@ -42,6 +42,8 @@ echo "#############################################################"
 
 /opt/eduid/bin/pip install -i ${PYPI} jose
 /opt/eduid/bin/pip install -i ${PYPI} requests
+/opt/eduid/bin/pip install -i ${PYPI} PyYAML
+/opt/eduid/bin/pip install -i ${PYPI} bs4
 
 /opt/eduid/bin/pip freeze
 
