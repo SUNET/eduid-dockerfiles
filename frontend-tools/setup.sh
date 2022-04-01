@@ -10,7 +10,7 @@ apt-get -y --no-install-recommends install \
 	python3-jinja2 \
 	python3-yaml \
 	python3-requests \
-	python3.7-venv \
+	python3-venv \
 	python3-pip \
 	inotify-tools \
 	procps \
@@ -21,7 +21,7 @@ apt-get -y --no-install-recommends install \
 apt-get clean
 rm -rf /var/lib/apt/lists/*
 
-python3.7 -m venv /opt/frontend
+python3 -m venv /opt/frontend
 /opt/frontend/bin/pip3 install -i ${PYPI} haproxy-status
 /opt/frontend/bin/pip3 install -i ${PYPI} PyYAML
 
