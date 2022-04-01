@@ -331,3 +331,9 @@ extra_jobs:
       - docker
     docker_name: eduid/satosa-scim
     docker_context_dir: satosa-scim
+
+  - name: eduid-varnish-docker
+    builders:
+      - docker
+    docker_name: eduid/varnish
+    docker_context_dir: varnish
