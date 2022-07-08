@@ -1,17 +1,17 @@
-# pythonenv used to get environment for db-scripts
 # (NOTE: this container is only used in tests and in eduid-developer)
-FROM docker.sunet.se/eduid/python3env
+FROM debian:stretch
 
 MAINTAINER eduid-dev <eduid-dev@SEGATE.SUNET.SE>
 
 # Install mongodb from mongodb.com
-RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 2930ADAE8CAF5059EE73BB4B58712A2291FA4AD5
-RUN echo "deb http://repo.mongodb.org/apt/debian stretch/mongodb-org/3.6 main" | tee /etc/apt/sources.list.d/mongodb-org-3.6.list
+ADD mongodb-server-4.0.asc /etc/apt/trusted.gpg.d/mongodb-server-4.0.asc
+RUN echo "deb http://repo.mongodb.org/apt/debian stretch/mongodb-org/4.0 main" | tee /etc/apt/sources.list.d/mongodb-org-4.0.list
 RUN apt-get update && apt-get install -y \
   vim \
   wget \
   mongodb-org \
   locales \
+  python3-venv \
   && apt-get clean && rm -rf /var/lib/apt/lists/*
 
 ADD setup.sh /opt/eduid/setup.sh
