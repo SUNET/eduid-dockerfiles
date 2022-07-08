@@ -255,12 +255,6 @@ extra_jobs:
     docker_name: eduid/eduid-statsdtail
     docker_context_dir: eduid-statsdtail
 
-  - name: eduid-rabbitmq-docker
-    builders:
-      - docker
-    docker_name: eduid/rabbitmq
-    docker_context_dir: rabbitmq
-
   - name: eduid-rsyslog-docker
     builders:
       - docker
@@ -331,3 +325,9 @@ extra_jobs:
       - docker
     docker_name: eduid/satosa-scim
     docker_context_dir: satosa-scim
+
+  - name: eduid-varnish-docker
+    builders:
+      - docker
+    docker_name: eduid/varnish
+    docker_context_dir: varnish
