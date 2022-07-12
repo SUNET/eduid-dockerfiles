@@ -1,0 +1,5 @@
+-i https://pypi.sunet.se
+pynacl>=1.0.1
+pysaml2>=6.5.0
+pymongo>=3.6.0,<4
+lxml>=4.6.2
