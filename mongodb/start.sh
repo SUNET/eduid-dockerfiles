@@ -30,7 +30,7 @@ if [ -s /opt/eduid/db-scripts/db_setup.py -a -s /opt/eduid/db-scripts/local.yaml
     echo "$0: Stopping mongodb after running db_setup.py"
     /sbin/start-stop-daemon --stop -c mongodb:mongodb --pidfile $pidfile \
         --remove-pidfile
-    sleep 2
+    sleep 10
 else
     echo "$0: /opt/eduid/db-scripts/db_setup.py not executable or /opt/eduid/db-scripts/local.yaml does not exist"
 fi
