@@ -1,11 +1,11 @@
 # (NOTE: this container is only used in tests and in eduid-developer)
-FROM debian:stretch
+FROM debian:buster
 
 MAINTAINER eduid-dev <eduid-dev@SEGATE.SUNET.SE>
 
 # Install mongodb from mongodb.com
-ADD mongodb-server-4.0.asc /etc/apt/trusted.gpg.d/mongodb-server-4.0.asc
-RUN echo "deb http://repo.mongodb.org/apt/debian stretch/mongodb-org/4.0 main" | tee /etc/apt/sources.list.d/mongodb-org-4.0.list
+ADD mongodb-server-4.2.asc /etc/apt/trusted.gpg.d/mongodb-server-4.2.asc
+RUN echo "deb http://repo.mongodb.org/apt/debian buster/mongodb-org/4.2 main" | tee /etc/apt/sources.list.d/mongodb-org-4.2.list
 RUN apt-get update && apt-get install -y \
   vim \
   wget \
