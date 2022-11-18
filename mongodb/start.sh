@@ -15,7 +15,7 @@ else
     mongo_args="--config ${dbconfig} --bind_ip 0.0.0.0 --dbpath /data --logpath /var/log/mongodb/mongodb.log"
 fi
 
-if [ -s /opt/eduid/db-scripts/db_setup.py -a -s /opt/eduid/db-scripts/local.yaml ]; then
+if  [[ -s /opt/eduid/db-scripts/db_setup.py && -s /opt/eduid/db-scripts/local.yaml ]]; then
     echo "$0: Starting mongodb for db_setup.py"
     /sbin/start-stop-daemon --start -c mongodb:mongodb --background \
         --make-pidfile --pidfile $pidfile \
