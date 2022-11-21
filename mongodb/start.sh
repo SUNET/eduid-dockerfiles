@@ -2,6 +2,7 @@
 
 dbconfig=/etc/mongod.conf
 pidfile=/var/run/mongodb.pid
+port=${PORT-'27017'}
 
 chown -R mongodb:mongodb /data /var/log/mongodb
 
@@ -10,9 +11,9 @@ if [ -s /opt/eduid/etc/mongod.conf ]; then
 fi
 
 if [ "x$REPLSET" != "x" ]; then
-    mongo_args="--config ${dbconfig} --replSet rs0 --bind_ip 0.0.0.0 --dbpath /data --logpath /var/log/mongodb/mongodb.log"
+    mongo_args="--config ${dbconfig} --replSet rs0 --bind_ip 0.0.0.0 --port ${port} --dbpath /data --logpath /var/log/mongodb/mongodb.log"
 else
-    mongo_args="--config ${dbconfig} --bind_ip 0.0.0.0 --dbpath /data --logpath /var/log/mongodb/mongodb.log"
+    mongo_args="--config ${dbconfig} --bind_ip 0.0.0.0 --port ${port} --dbpath /data --logpath /var/log/mongodb/mongodb.log"
 fi
 
 if  [[ -s /opt/eduid/db-scripts/db_setup.py && -s /opt/eduid/db-scripts/local.yaml ]]; then
