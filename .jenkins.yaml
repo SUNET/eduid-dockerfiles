@@ -331,3 +331,10 @@ extra_jobs:
       - docker
     docker_name: eduid/varnish
     docker_context_dir: varnish
+
+  - name: eduid-smtpdfix-docker
+    builders:
+      - docker
+    docker_name: eduid/smtpdfix
+    docker_context_dir: smtpdfix
+
