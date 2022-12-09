@@ -6,7 +6,7 @@
 #
 --index-url https://pypi.sunet.se
 
-certifi==2022.6.15
+certifi==2022.12.7
     # via requests
 cffi==1.15.1
     # via
