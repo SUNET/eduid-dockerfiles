@@ -1,24 +1,62 @@
-FROM docker.sunet.se/eduid/pythonenv
-
-MAINTAINER eduid-dev <eduid-dev@SEGATE.SUNET.SE>
+FROM debian:stable as build
 
 ENV DEBIAN_FRONTEND noninteractive
 
 RUN apt-get update && \
     apt-get install -y \
-      opensc \
+      build-essential \
+      dnsutils \
+      git \
+      libpython3-dev \
       libz-dev \
       mercurial \
-      dnsutils \
+      python3-cffi \
+      python3-distutils \
+      python3-minimal \
+      python3-venv \
       swig \
-      softhsm2 \
     && apt-get clean
 
 RUN rm -rf /var/lib/apt/lists/*
 
+
+RUN mkdir -p /opt
+RUN python3 -mvenv /opt/eduid
+
 RUN /opt/eduid/bin/pip install --upgrade git+https://github.com/LudovicRousseau/PyKCS11#egg=pykcs11
-RUN /opt/eduid/bin/pip install --upgrade git+https://github.com/IdentityPython/pyeleven#egg=pyeleven
+RUN /opt/eduid/bin/pip install --upgrade git+https://github.com/IdentityPython/pyeleven@fix_python3#egg=pyeleven
 RUN /opt/eduid/bin/pip install gunicorn flask
+
+
+FROM debian:stable
+
+MAINTAINER eduid-dev <eduid-dev@SEGATE.SUNET.SE>
+
+ENV DEBIAN_FRONTEND noninteractive
+
+# Add user/group before installing any packages to get consistent uid/gid
+RUN addgroup --system eduid && adduser --system --shell /bin/false --ingroup eduid eduid
+
+#
+# Install tools that are helpful when troubleshooting, and some things needed in runtime.
+#
+RUN apt-get update && \
+    apt-get -y dist-upgrade && \
+    apt-get install -y \
+      bind9-host \
+      curl \
+      iputils-ping \
+      net-tools \
+      netcat-openbsd \
+      opensc \
+      procps \
+      python3-minimal \
+      softhsm2 \
+    && apt-get clean && rm -rf /var/lib/apt/lists/*
+
+RUN mkdir -p /var/log/eduid && chown eduid: /var/log/eduid && chmod 770 /var/log/eduid
+
+COPY --from=build /opt/eduid /opt/eduid
 
 WORKDIR /
 
