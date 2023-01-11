@@ -9,10 +9,7 @@ RUN apt-get update && \
       git \
       libpython3-dev \
       libz-dev \
-      mercurial \
       python3-cffi \
-      python3-distutils \
-      python3-minimal \
       python3-venv \
       swig \
     && apt-get clean
