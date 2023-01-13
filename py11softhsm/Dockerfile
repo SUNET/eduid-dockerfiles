@@ -59,6 +59,8 @@ COPY --from=build /opt/eduid /opt/eduid
 WORKDIR /
 
 COPY start.sh /start.sh
-RUN chmod 775 /start.sh
+COPY import-key.sh /import-key.sh
+COPY keys.txt /keys.txt
+RUN chmod 775 /start.sh /import-key.sh
 
 CMD ["bash", "/start.sh"]

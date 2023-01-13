@@ -1,0 +1,5 @@
+# List keys to import into SoftHSM on startup here like this:
+#
+# TokenName  KeyIdHex  KeyLabel          Filename
+# my_token   1234      my_key            /path/to/my_key.pem
+#
