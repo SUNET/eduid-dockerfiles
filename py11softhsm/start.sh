@@ -29,13 +29,16 @@ if [ -f "${import_keys_file}" ]; then
     echo "(end of ${import_keys_file})"
     grep -ve '^#' -e '^\s*$' "${import_keys_file}" | while read -r line; do
         # shellcheck disable=SC2086
-        bash /import-key.sh ${line}
+        /import-key.sh ${line}
     done
 fi
 
-echo "---"
+echo -e "\n\n---"
 echo "$0: Objects in SoftHSM:"
-pkcs11-tool --module "${PKCS11MODULE}" --login --pin "${PKCS11PIN}" --list-objects
+pkcs11-tool --module /usr/lib/softhsm/libsofthsm2.so --login --pin 1234 --list-token-slots || true
+echo "---"
+pkcs11-tool --module "${PKCS11MODULE}" --login --pin "${PKCS11PIN}" --list-objects || true
+echo -e "---\n\n"
 
 chown -R eduid: "${log_dir}"
 chown -R eduid:softhsm "${var_dir}" /etc/softhsm

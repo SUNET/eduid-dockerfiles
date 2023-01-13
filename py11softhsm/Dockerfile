@@ -38,6 +38,8 @@ RUN addgroup --system eduid && adduser --system --shell /bin/false --ingroup edu
 #
 # Install tools that are helpful when troubleshooting, and some things needed in runtime.
 #
+# ssl-cert is used for the default healthcheck (in /healthcheck.sh)
+#
 RUN apt-get update && \
     apt-get -y dist-upgrade && \
     apt-get install -y \
@@ -49,6 +51,7 @@ RUN apt-get update && \
       opensc \
       procps \
       python3-minimal \
+      ssl-cert \
       softhsm2 \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
 
@@ -60,7 +63,13 @@ WORKDIR /
 
 COPY start.sh /start.sh
 COPY import-key.sh /import-key.sh
+COPY healthcheck.sh /healthcheck.sh
 COPY keys.txt /keys.txt
-RUN chmod 775 /start.sh /import-key.sh
+RUN chmod 775 /start.sh /import-key.sh /healthcheck.sh
+
+# This is where SoftHSM2 will store its data (including the imported keys)
+VOLUME /var/lib/softhsm
+
+HEALTHCHECK --interval=27s CMD /healthcheck.sh | grep -q STATUS_OK
 
 CMD ["bash", "/start.sh"]

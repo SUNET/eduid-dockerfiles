@@ -3,3 +3,4 @@
 # TokenName  KeyIdHex  KeyLabel          Filename
 # my_token   1234      my_key            /path/to/my_key.pem
 #
+health       9999      check             /etc/ssl/private/ssl-cert-snakeoil.key
