@@ -9,7 +9,8 @@
 #    - Tokens
 #      - Objects (e.g. keys)
 #
-# Slots are 'partitions', and we don't use that.
+# Slots are 'partitions', and we don't use that. Pyeleven looks for
+# tokens and then for keys by label.
 #
 
 set -e
@@ -54,13 +55,20 @@ if ! pkcs11-tool --module "${PKCS11MODULE}" --login --pin "${PKCS11PIN}" \
 
     echo "$0: Importing key token=${token_label}/id=${key_id_hex}/key=${key_label} from ${keyfile}"
 
-    # Convert PEM formatted secret key to DER format, for SoftHSM
-    tmpkey=$(mktemp --tmpdir=/dev/shm import-key-XXXXXX.p8)
+    # Convert PEM formatted secret key to PKCS#8 format, for SoftHSM
+    tmpkey=$(mktemp --tmpdir=/dev/shm import-key-XXXXXX.key)
     chmod 600 "${tmpkey}"
-    openssl pkcs8 -topk8 -inform PEM -outform PEM -nocrypt -in "${keyfile}" -out "${tmpkey}"
 
-    softhsm2-util --import "${tmpkey}" --token "${token_label}" --label "${key_label}" \
-            --id "${key_id_hex}" --pin "${PKCS11PIN}" --no-public-key
+    openssl pkcs8 -topk8 -inform PEM -outform PEM -nocrypt -in "${keyfile}" -out "${tmpkey}"
+    softhsm2-util --import "${tmpkey}" --token "${token_label}" --pin "${PKCS11PIN}" \
+           --label "${key_label}" --id "${key_id_hex}" --no-public-key
+
+    # Keys can also be imported like this, but they don't end up in the right token then.
+    # set -x
+    # openssl rsa -inform PEM -outform DER -in "${keyfile}" -out "${tmpkey}"
+    # pkcs11-tool --module "${PKCS11MODULE}" --login --pin "${PKCS11PIN}" \
+    #     --id "${key_id_hex}" --label "${key_label}" --login -y privkey -w "${tmpkey}"
+    # set +x
 
     rm "${tmpkey}"
 else
