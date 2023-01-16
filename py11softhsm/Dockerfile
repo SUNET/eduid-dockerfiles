@@ -68,7 +68,9 @@ COPY keys.txt /keys.txt
 RUN chmod 775 /start.sh /import-key.sh /healthcheck.sh
 
 # This is where SoftHSM2 will store its data (including the imported keys)
-VOLUME /var/lib/softhsm
+# We actually want to re-initialise the SoftHSM database on every container
+# startup, so we avoid defining this volume.
+# VOLUME /var/lib/softhsm
 
 HEALTHCHECK --interval=27s CMD /healthcheck.sh
 
