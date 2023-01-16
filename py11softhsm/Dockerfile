@@ -70,6 +70,6 @@ RUN chmod 775 /start.sh /import-key.sh /healthcheck.sh
 # This is where SoftHSM2 will store its data (including the imported keys)
 VOLUME /var/lib/softhsm
 
-HEALTHCHECK --interval=27s CMD /healthcheck.sh | grep -q STATUS_OK
+HEALTHCHECK --interval=27s CMD /healthcheck.sh
 
 CMD ["bash", "/start.sh"]
