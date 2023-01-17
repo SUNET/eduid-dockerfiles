@@ -22,7 +22,7 @@ RUN python3 -mvenv /opt/eduid
 
 RUN /opt/eduid/bin/pip install --upgrade wheel
 RUN /opt/eduid/bin/pip install --upgrade git+https://github.com/LudovicRousseau/PyKCS11#egg=pykcs11
-RUN /opt/eduid/bin/pip install --upgrade git+https://github.com/IdentityPython/pyeleven@fix_python3#egg=pyeleven
+RUN /opt/eduid/bin/pip install --upgrade git+https://github.com/IdentityPython/pyeleven#egg=pyeleven
 RUN /opt/eduid/bin/pip install gunicorn flask
 
 
