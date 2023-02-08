@@ -9,6 +9,5 @@ RUN apt-get -q update && \
 VOLUME ["/var/log/squid", "/etc/squid"]
 
 EXPOSE 3128
-EXPOSE 8080
 
 CMD [ "squid", "-N", "-f", "/etc/squid/squid.conf" ]
