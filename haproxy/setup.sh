@@ -14,7 +14,8 @@ apt-get -y install \
 	iputils-ping \
 	net-tools \
 	netcat-openbsd \
-	procps
+	procps \
+	socat
 
 # save space
 rm -rf /var/lib/apt/lists/*
