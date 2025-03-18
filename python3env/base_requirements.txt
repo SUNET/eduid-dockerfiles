@@ -48,7 +48,7 @@ six==1.16.0
     # via
     #   pysaml2
     #   python-dateutil
-urllib3==1.26.18
+urllib3==1.26.19
     # via requests
 xmlschema==1.11.3
     # via pysaml2
