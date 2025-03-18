@@ -20,6 +20,8 @@ cryptography==41.0.6
     #   pysaml2
 defusedxml==0.7.1
     # via pysaml2
+dnspython==2.7.0
+    # via pymongo
 elementpath==2.5.3
     # via xmlschema
 idna==3.3
@@ -28,7 +30,7 @@ lxml==4.9.1
     # via -r base_requirements.in
 pycparser==2.21
     # via cffi
-pymongo==3.12.3
+pymongo==4.6.3
     # via -r base_requirements.in
 pynacl==1.5.0
     # via -r base_requirements.in
