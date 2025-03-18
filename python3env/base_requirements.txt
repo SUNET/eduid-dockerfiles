@@ -22,7 +22,7 @@ defusedxml==0.7.1
     # via pysaml2
 elementpath==2.5.3
     # via xmlschema
-idna==3.3
+idna==3.7
     # via requests
 lxml==4.9.1
     # via -r base_requirements.in
