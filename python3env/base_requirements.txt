@@ -42,7 +42,7 @@ python-dateutil==2.8.2
     # via pysaml2
 pytz==2022.1
     # via pysaml2
-requests==2.28.1
+requests==2.32.2
     # via pysaml2
 six==1.16.0
     # via
