@@ -6,7 +6,7 @@
 #
 --index-url https://pypi.sunet.se
 
-certifi==2022.12.7
+certifi==2024.7.4
     # via requests
 cffi==1.15.1
     # via
@@ -20,15 +20,17 @@ cryptography==41.0.6
     #   pysaml2
 defusedxml==0.7.1
     # via pysaml2
+dnspython==2.7.0
+    # via pymongo
 elementpath==2.5.3
     # via xmlschema
-idna==3.3
+idna==3.7
     # via requests
 lxml==4.9.1
     # via -r base_requirements.in
 pycparser==2.21
     # via cffi
-pymongo==3.12.3
+pymongo==4.6.3
     # via -r base_requirements.in
 pynacl==1.5.0
     # via -r base_requirements.in
@@ -40,13 +42,13 @@ python-dateutil==2.8.2
     # via pysaml2
 pytz==2022.1
     # via pysaml2
-requests==2.28.1
+requests==2.32.2
     # via pysaml2
 six==1.16.0
     # via
     #   pysaml2
     #   python-dateutil
-urllib3==1.26.18
+urllib3==1.26.19
     # via requests
 xmlschema==1.11.3
     # via pysaml2
