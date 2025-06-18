@@ -1,4 +1,4 @@
 # Remeber to set these on telegraf job in .jenkins.yaml if running on ci
-TELEGRAF_VERSION=1.16.1-1
-TELEGRAF_TAG=1.16.1
+TELEGRAF_VERSION=1.34.4-1
+TELEGRAF_TAG=1.34.4
 TELEGRAF_IMAGE=local/telegraf

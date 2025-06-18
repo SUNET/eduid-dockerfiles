@@ -1,5 +1,5 @@
 # Start by building the application.
-FROM debian:testing as build
+FROM debian:testing AS build
 ARG TELEGRAF_VERSION
 
 COPY telegraf_${TELEGRAF_VERSION}_amd64.deb /
