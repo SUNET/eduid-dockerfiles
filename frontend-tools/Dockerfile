@@ -1,4 +1,4 @@
-FROM debian:testing
+FROM debian:stable
 ADD setup.sh /setup.sh
 RUN /setup.sh
 
