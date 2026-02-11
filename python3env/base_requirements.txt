@@ -8,13 +8,13 @@
 
 certifi==2024.7.4
     # via requests
-cffi==1.15.1
+cffi==2.0.0
     # via
     #   cryptography
     #   pynacl
 charset-normalizer==2.1.0
     # via requests
-cryptography==41.0.6
+cryptography==46.0.5
     # via
     #   pyopenssl
     #   pysaml2
@@ -48,6 +48,8 @@ six==1.16.0
     # via
     #   pysaml2
     #   python-dateutil
+typing-extensions==4.15.0
+    # via cryptography
 urllib3==1.26.19
     # via requests
 xmlschema==1.11.3
