@@ -3,7 +3,7 @@
 #
 
 # use debian:testing to get haproxy 2.0
-FROM debian:testing
+FROM debian:trixie
 
 MAINTAINER eduid-dev <eduid-dev@SEGATE.SUNET.SE>
 
