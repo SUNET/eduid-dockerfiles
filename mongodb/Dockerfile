@@ -9,14 +9,19 @@ ADD libssl1.1_1.1.1w-0+deb11u2_amd64.deb /tmp/libssl1.1_1.1.1w-0+deb11u2_amd64.d
 RUN dpkg -i /tmp/libssl1.1_1.1.1w-0+deb11u2_amd64.deb
 RUN rm /tmp/libssl1.1_1.1.1w-0+deb11u2_amd64.deb
 # end libssl1.1 hack
-ADD mongodb-server-6.0.asc /etc/apt/trusted.gpg.d/mongodb-server-6.0.asc
-RUN echo "deb http://repo.mongodb.org/apt/debian bullseye/mongodb-org/6.0 main" | tee /etc/apt/sources.list.d/mongodb-org-6.0.list
 RUN apt-get update && apt-get install -y \
   vim \
   wget \
-  mongodb-org \
   locales \
   python3-venv \
+  gnupg
+
+ADD mongodb-server-6.0.asc /etc/apt/trusted.gpg.d/mongodb-server-6.0.asc
+RUN echo "deb [ signed-by=/etc/apt/trusted.gpg.d/mongodb-server-6.0.asc ] http://repo.mongodb.org/apt/debian bullseye/mongodb-org/6.0 main" | tee /etc/apt/sources.list.d/mongodb-org-6.0.list
+# MongoDB 6.0 key uses SHA1 binding signatures which Debian trixie's sqv rejects; fall back to gpgv
+RUN echo 'Apt::Key::gpgvcommand "gpgv";' > /etc/apt/apt.conf.d/99gpgv-compat
+RUN apt-get update && apt-get install -y \
+  mongodb-org \
   && apt-get clean && rm -rf /var/lib/apt/lists/*
 
 ADD setup.sh /opt/eduid/setup.sh
