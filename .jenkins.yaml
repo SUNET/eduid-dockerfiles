@@ -1,4 +1,4 @@
-
+disabled: true
 clean_workspace: true
 triggers:
   github_push: false
