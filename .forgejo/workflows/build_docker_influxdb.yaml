@@ -1,0 +1,31 @@
+name: build-docker
+
+on:
+  push:
+    branches:
+      - '**'
+    tags-ignore:
+      - '**'
+  schedule:
+    # weekly on monday 02:00
+    - cron: '22 2 * * 1'
+
+jobs:
+  build:
+    runs-on: docker
+    container: ghcr.io/catthehacker/ubuntu:act-22.04
+    steps:
+      - name: Checkout the repo
+        uses: https://platform.sunet.se/actions/checkout@v4
+      - name: Login to Container Registry
+        uses: https://platform.sunet.se/actions/login-action@v3
+        with:
+          registry: platform.sunet.se
+          username: ci-sunet-eduid
+          password: ${{ secrets.CI_SUNET_EDUID }}
+      - name: Build and Push influxdb
+        uses: https://platform.sunet.se/actions/build-push-action@v6
+        with:
+          push: true
+          context: influxdb
+          tags: platform.sunet.se/eduid/influxdb:latest
