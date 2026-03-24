@@ -33,7 +33,7 @@ MAINTAINER eduid-dev <eduid-dev@SEGATE.SUNET.SE>
 ENV DEBIAN_FRONTEND noninteractive
 
 # Add user/group before installing any packages to get consistent uid/gid
-RUN addgroup --system eduid && adduser --system --shell /bin/false --ingroup eduid eduid
+RUN groupadd --system eduid && useradd --system --shell /bin/false --gid eduid eduid
 
 #
 # Install tools that are helpful when troubleshooting, and some things needed in runtime.

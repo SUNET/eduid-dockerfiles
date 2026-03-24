@@ -7,7 +7,7 @@ apt-get update
 apt-get -y install \
     redis-server \
     sysvbanner \
-    python-virtualenv
+    python3-venv
 apt-get clean
 rm -rf /var/lib/apt/lists/*
 
@@ -17,7 +17,7 @@ echo "#############################################################"
 echo "$0: Using PyPi URL ${PYPI}"
 echo "#############################################################"
 
-virtualenv -p python3 /opt/eduid/
+python3 -m venv /opt/eduid/
 # redis-trib are cluster management scripts
 # 0.5.2 has an installation issue, unpin when it is resolved
 # https://github.com/projecteru/redis-trib.py/issues/11
