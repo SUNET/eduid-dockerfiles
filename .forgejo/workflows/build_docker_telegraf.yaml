@@ -25,8 +25,8 @@ jobs:
           password: ${{ secrets.CI_SUNET_EDUID }}
       - name: Build and Push telegraf
         run: |
-          TELEGRAF_VERSION="1.36.3-1"
-          TELEGRAF_TAG="1.36.3"
-          TELEGRAF_IMAGE="platform.sunet.se/eduid/telegraf"
+          export TELEGRAF_VERSION="1.36.3-1"
+          export TELEGRAF_TAG="1.36.3"
+          export TELEGRAF_IMAGE="platform.sunet.se/eduid/telegraf"
           cd telegraf
           ./build.sh
